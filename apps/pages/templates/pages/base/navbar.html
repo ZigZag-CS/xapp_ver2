@@ -1,0 +1,68 @@
+{% load static %}
+
+
+
+    <nav class="navbar navbar-expand-lg fixed-top scrolling-navbar indigo">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar"
+                    aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="icon-menu"></span>
+                    <span class="icon-menu"></span>
+                    <span class="icon-menu"></span>
+                </button>
+                <a href="#" class="navbar-brand"><img src="{% static 'pages/img/logo.png' %}" alt=""></a>
+            </div>
+            <div class="collapse navbar-collapse" id="main-navbar">
+                <ul class="navbar-nav mr-auto w-100 justify-content-end clearfix">
+                    <li class="nav-item active"><a class="nav-link" href="#hero-area">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+                <div class="btn-sing float-right">
+                    {% if user.is_authenticated %}
+{#                        <a class="btn btn-border" href="{% static '../html/page-login.html' %}">Dashboard</a>#}
+                        <a class="btn btn-border" href="#">Dashboard</a>
+                    {% else %}
+{#                        <a class="btn btn-border" href="{% static '../html/page-login.html' %}">Login <span style="color: black;">or</span> Register </a>#}
+{#                        <a class="btn btn-border" href="#">SignIn <span style="color: black;">or</span> Register </a>#}
+                        <p class="btn btn-border"><a href="{% url 'login' %}">Login</a> <span style="color: red;">|</span> <a href="{% url 'register' %}">Register</a> </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <ul class="mobile-menu navbar-nav">
+            <li><a class="page-scroll" href="#hero-area">Home</a></li>
+            <li><a class="page-scroll" href="#services">Services</a></li>
+            <li><a class="page-scroll" href="#pricing">Pricing</a></li>
+            <li><a class="page-scroll" href="#contact">Contact</a></li>
+        </ul>
+
+    </nav>
+
+    <div id="hero-area" class="hero-area-bg particles_js">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="contents text-center">
+                        <h2 class="head-title wow fadeInUp">Awesome App for Your Modern Lifestyle<br>
+                            For Business, SaaS and Apps</h2>
+                        <div class="header-button wow fadeInUp" data-wow-delay="0.3s">
+                            <a href="#" class="btn btn-common">Download Now</a>
+                            <a href="#" class="btn btn-common blush">View Demo</a>
+                        </div>
+                    </div>
+                    <div class="img-thumb text-center wow fadeInUp" data-wow-delay="0.6s">
+                        <img class="img-fluid" src="{% static 'pages/img/hero-1.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="particles-js"></div>
+    </div>
+
+

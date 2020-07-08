@@ -1,0 +1,76 @@
+{% extends "accounts/auth_base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<!--<h1>Login</h1>-->
+<!--<form method="post">-->
+<!--    {% csrf_token %}-->
+<!--    {{ form }}-->
+<!--    <button type="submit" class="btn btn-default">Submit</button>-->
+<!--</form>-->
+
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+        <div class="bar4"></div>
+        <div class="bar5"></div>
+    </div>
+</div>
+
+<div class="pattern">
+    <span class="red"></span>
+    <span class="indigo"></span>
+    <span class="blue"></span>
+    <span class="green"></span>
+    <span class="orange"></span>
+</div>
+
+<div class="auth-main particles_js">
+    <div class="auth_div vivify popIn">
+        <div class="auth_brand">
+            <a class="navbar-brand" href="javascript:void(0);"><img src="{% static 'accounts/images/icon.svg' %}" width="30" height="30" class="d-inline-block align-top mr-2" alt="">Oculux</a>
+        </div>
+        <div class="card">
+            <div class="body">
+                <p class="lead">Login to your account</p>
+
+                <form method="post" class="form-auth-small m-t-20">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    <div class="form-group">
+                        <label for="id_email" class="control-label sr-only">Email</label>
+                        <input type="email" name="email" class="form-control round" id="id_email" value="user@domain.com" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password" class="control-label sr-only">Password</label>
+                        <input type="password" name="password" class="form-control round" id="id_password" value="thisisthepassword" placeholder="Password">
+                    </div>
+                    <div class="form-group clearfix">
+                        <label class="fancy-checkbox element-left">
+                            <input type="checkbox">
+                            <span>Remember me</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-round btn-block">LOGIN</button>
+                    <div class="bottom">
+                        <span class="helper-text m-b-10"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
+                        <span>Don't have an account? <a href="{% url 'register' %}">Register</a></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="particles-js"></div>
+</div>
+<!-- END WRAPPER -->
+
+
+
+
+
+{% endblock content %}

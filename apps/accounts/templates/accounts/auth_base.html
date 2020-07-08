@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="description" content="Oculux Bootstrap 4x admin is super flexible, powerful, clean &amp; modern responsive admin dashboard with unlimited possibilities.">
+<meta name="keywords" content="admin template, Oculux admin template, dashboard template, flat admin template, responsive admin template, web app, Light Dark version">
+<meta name="author" content="GetBootstrap, design by: puffinthe.com">
+<!--<link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">-->
+
+<title>:: DASHBOARD ::</title>
+
+{% include 'accounts/auth_base/css.html' %}
+
+
+</head>
+
+
+<body class="theme-cyan font-montserrat light_version font-roboto theme-red">
+
+            {% if messages %}
+                <div class="alert alert-success messages">
+            {% for message in messages %}
+                    <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                        {{ message }}<br/>
+                    </span>
+            {% endfor %}
+
+          </div>
+        {% endif %}
+    {% block content %}
+
+    {% endblock content %}
+
+{% include 'accounts/auth_base/js.html' %}
+
+</body>
+
+
+
+</html>
