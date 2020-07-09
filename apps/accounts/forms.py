@@ -185,36 +185,6 @@ class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(label="Confirm pass", widget=forms.PasswordInput)
 
-    # validator daca username exista
-    # def clean_username(self):
-    #     username = self.cleaned_data.get("username")
-    #     qs = User.objects.filter(username=username)
-    #
-    #     if qs.exists():
-    #         raise forms.ValidationError("Username exists")
-    #
-    #     return username
-
-    # validator daca username exista
-    # def clean_email(self):
-    #     email = self.cleaned_data.get("email")
-    #     qs = User.objects.filter(email=email)
-    #
-    #     if qs.exists():
-    #         raise forms.ValidationError("Email exists")
-    #
-    #     return email
-
-    # def clean(self):
-    #     data = self.cleaned_data
-    #     password = self.cleaned_data.get("password")
-    #     password2 = self.cleaned_data.get("password2")
-    #
-    #     if password2 != password:
-    #         raise forms.ValidationError("Password error")
-    #
-    #     return data
-
     def clean_password2(self):
         # Check that the two password entries match
         password1 = self.cleaned_data.get("password1")

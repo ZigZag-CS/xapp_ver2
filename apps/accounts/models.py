@@ -3,6 +3,7 @@ from datetime import timedelta
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.utils.translation import gettext_lazy as _
 
 from django.core.mail import send_mail
 from django.db.models import Q
@@ -10,6 +11,8 @@ from django.db.models.signals import post_save, pre_save
 from django.template.loader import get_template
 from django.urls import reverse
 from django.utils import timezone
+from django_countries.fields import CountryField
+from phonenumber_field.modelfields import PhoneNumberField
 
 from .utils import *
 
@@ -59,12 +62,22 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    email       = models.EmailField(max_length=255, unique=True)
-    full_name   = models.CharField(max_length=255, blank=True, null=True)
-    is_active      = models.BooleanField(default=True) # can login
-    staff       = models.BooleanField(default=False) # staff user non superuser
-    admin       = models.BooleanField(default=False) # superuser
-    timestamp   = models.DateTimeField(auto_now_add=True)
+    email           = models.EmailField(max_length=255, unique=True)
+    full_name       = models.CharField(max_length=255, blank=True, null=True)
+    avatar = models.ImageField(_("Avatar"), upload_to="client/", null=True, blank=True,
+                               default='no_image_app_content.png')
+    is_active       = models.BooleanField(default=True) # can login
+    staff           = models.BooleanField(default=False) # staff user non superuser
+    admin           = models.BooleanField(default=False) # superuser
+    timestamp       = models.DateTimeField(auto_now_add=True)
+    country         = CountryField()
+    city            = models.CharField(max_length=255, blank=True, null=True)
+    address         = models.CharField(max_length=255, blank=True, null=True)
+    phone_number    = PhoneNumberField(blank=True)
+    is_traider      = models.BooleanField(default=False)
+
+
+
     # confirm     = models.BooleanField(default=False)
     # confirmed_date     = models.DateTimeField(default=False)
 

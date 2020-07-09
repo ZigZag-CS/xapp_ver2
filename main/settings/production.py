@@ -41,6 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
 
+    # addons
+    'django_countries',
+    'phonenumber_field',
+
+
     # project apps
     'apps.pages.apps.PagesConfig',
     'apps.accounts.apps.AccountsConfig',
@@ -159,6 +164,9 @@ STATICFILES_FINDERS = (
 
 
 # *************************** OWN settings ***************************
+
+# PHONENUMBER_DEFAULT_REGION = 'INTERNATIONAL'
+PHONENUMBER_DB_FORMAT = 'INTERNATIONAL'
 
 
 # ############### Twilio SendGrid ###############
