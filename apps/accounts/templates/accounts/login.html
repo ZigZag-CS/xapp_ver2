@@ -4,71 +4,83 @@
 {% block content %}
 
 
-<!--<h1>Login</h1>-->
-<!--<form method="post">-->
-<!--    {% csrf_token %}-->
-<!--    {{ form }}-->
-<!--    <button type="submit" class="btn btn-default">Submit</button>-->
-<!--</form>-->
+    <div class="row justify-content-center">
+            <div class="col-md-9 col-lg-12 col-xl-10">
+                <div class="card shadow-lg o-hidden border-0 my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-flex">
+                                <div
+                                        class="flex-grow-1 bg-login-image"
+                                        style="background-image: url({% static 'accounts/images/dogs/image3.jpeg' %});">
 
-<!-- Page Loader -->
-<div class="page-loader-wrapper">
-    <div class="loader">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-        <div class="bar4"></div>
-        <div class="bar5"></div>
-    </div>
-</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h4 class="text-dark mb-4">Welcome Back!</h4>
+                                    </div>
 
-<div class="pattern">
-    <span class="red"></span>
-    <span class="indigo"></span>
-    <span class="blue"></span>
-    <span class="green"></span>
-    <span class="orange"></span>
-</div>
 
-<div class="auth-main particles_js">
-    <div class="auth_div vivify popIn">
-        <div class="auth_brand">
-            <a class="navbar-brand" href="javascript:void(0);"><img src="{% static 'accounts/images/icon.svg' %}" width="30" height="30" class="d-inline-block align-top mr-2" alt="">Oculux</a>
-        </div>
-        <div class="card">
-            <div class="body">
-                <p class="lead">Login to your account</p>
+                                    <form method="post" class="user">
+                                        {% csrf_token %}
+                                        {{ form.non_field_errors }}
 
-                <form method="post" class="form-auth-small m-t-20">
-                    {% csrf_token %}
-                    {{ form.non_field_errors }}
-                    <div class="form-group">
-                        <label for="id_email" class="control-label sr-only">Email</label>
-                        <input type="email" name="email" class="form-control round" id="id_email" value="user@domain.com" placeholder="Email" required>
+                                        <div class="form-group">
+                                            <input class="form-control form-control-user" type="email" name="email" id="id_email" required aria-describedby="emailHelp" placeholder="Enter Email Address..." >
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input class="form-control form-control-user" type="password" name="password" id="id_password" placeholder="Password" >
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1">
+                                                    <label class="form-check-label custom-control-label" for="formCheck-1">Remember Me</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary btn-block text-white btn-user" >Login</button>
+
+                                        <hr>
+
+                                        <a class="btn btn-primary btn-block text-white btn-facebook btn-user" role="button">
+                                            <i class="fab fa-facebook-f"></i>&nbsp; Login with Facebook
+                                        </a>
+
+                                        <a class="btn btn-primary btn-block text-white btn-facebook btn-user" role="button">
+                                            <i class="fab fa-twitter"></i>&nbsp; Login with Twitter
+                                        </a>
+
+                                        <a class="btn btn-primary btn-block text-white btn-google btn-user" role="button">
+                                            <i class="fab fa-google"></i>&nbsp; Login with Google
+                                        </a>
+
+                                        <a class="btn btn-primary btn-block text-white btn-facebook btn-user" role="button">
+                                            <i class="fab fa-instagram"></i>&nbsp; Login with Instagram
+                                        </a>
+
+
+
+                                        <hr>
+
+                                    </form>
+
+                                    <div class="text-center"><a class="small" href="#">Forgot Password?</a></div>
+                                    <div class="text-center"><a class="small" href="#">Create an Account!</a></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="id_password" class="control-label sr-only">Password</label>
-                        <input type="password" name="password" class="form-control round" id="id_password" value="thisisthepassword" placeholder="Password">
-                    </div>
-                    <div class="form-group clearfix">
-                        <label class="fancy-checkbox element-left">
-                            <input type="checkbox">
-                            <span>Remember me</span>
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-round btn-block">LOGIN</button>
-                    <div class="bottom">
-                        <span class="helper-text m-b-10"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
-                        <span>Don't have an account? <a href="{% url 'register' %}">Register</a></span>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="particles-js"></div>
-</div>
-<!-- END WRAPPER -->
-
 
 
 
