@@ -20,7 +20,7 @@
                                 <div class="dropdown-menu" role="menu">
                                     <a class="dropdown-item" role="presentation" href="#">Dashboard</a>
                                     <a class="dropdown-item" role="presentation" href="#">Message to support</a>
-                                    <a class="dropdown-item" role="presentation" href="#">Logout</a>
+                                    <a class="dropdown-item" role="presentation" href=" {% url 'logout' %} ">Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -28,20 +28,12 @@
                     {% else %}
 
                         <ul class="nav navbar-nav ml-auto">
-{#                            <li class="nav-item dropdown">#}
-{#                                <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Account</a>#}
-{#                                <div class="dropdown-menu" role="menu">#}
-{#                                    <a class="dropdown-item" role="presentation" href="#">Dashboard</a>#}
-{#                                    <a class="dropdown-item" role="presentation" href="#">Message to support</a>#}
-{#                                    <a class="dropdown-item" role="presentation" href="#">Logout</a>#}
-{#                                </div>#}
-{#                            </li>#}
                         </ul>
 
                         <span class="navbar-text">
-                            <a class="login" href="#">Log In</a>
+                            <a class="login" href="{% url 'login' %}">Log In</a>
                         </span>
-                        <a class="btn btn-light action-button" role="button" href="#">Sign Up</a>
+                        <a class="btn btn-light action-button" role="button" href="{% url 'register' %}">Sign Up</a>
 
                      {% endif %}
 

@@ -4,6 +4,7 @@
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.utils.translation import gettext_lazy as _
 
 # from django.urls import reverse
 # from django.utils.decorators import method_decorator
@@ -49,6 +50,7 @@ class AccountEmailActivateView(FormMixin, View):
 
     def get(self, request, key=None, *args, **kwargs):
         self.key = key
+        print(f'KEY >>>>>>>>>>>> {key} <<<<<<<<<<<<<<<')
         if key is not None:
             qs = EmailActivation.objects.filter(key__iexact=key)
             confirm_qs = qs.confirmable()
@@ -70,7 +72,7 @@ class AccountEmailActivateView(FormMixin, View):
             'form': self.get_form(),
             'key': key
         }
-        return render(request, 'registration/activation-error.html', context)
+        return render(request, 'accounts/registration/activation-error.html', context)
 
     def post(self, request, *args, **kwargs):
         # create form to receive an email
@@ -213,6 +215,9 @@ class UserDetailUpdateView(LoginRequiredMixin ,UpdateView):
 
 
 class MyPasswordChangeView(PasswordChangeView):
-    template_name = 'accounts/registration/password_change_form.html'
+    template_name = 'accounts/password_change.html'
     success_url = reverse_lazy('login')
 
+class MyPasswordChangeDoneView(PasswordChangeDoneView):
+    template_name = 'accounts/password_change_done.html'
+    title = _('Password change successful')

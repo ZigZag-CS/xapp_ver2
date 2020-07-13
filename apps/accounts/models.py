@@ -210,9 +210,9 @@ class EmailActivation(models.Model):
                     'path': path,
                     'email': self.email
                 }
-                txt_ = get_template("registration/emails/verify.txt").render(context)
-                html_ = get_template("registration/emails/verify.html").render(context)
-                subject = '1-Click Email Verification'
+                txt_ = get_template("accounts/registration/emails/verify.txt").render(context)
+                html_ = get_template("accounts/registration/emails/verify.html").render(context)
+                subject = '2-Click Email Verification'
                 from_email = settings.DEFAULT_FROM_EMAIL
                 recipient_list = [self.email]
                 sent_mail = send_mail(

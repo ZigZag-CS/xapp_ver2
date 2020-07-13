@@ -25,7 +25,7 @@ SECRET_KEY = '=sap1d1&v1ywej(_o+6pv*3d(*hmkz)a_&l6_9aa4aww++ow#z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -184,9 +184,9 @@ BASE_URL = 'http://127.0.0.1:8000'
 
 # ######## MAILCHIMP settings ################
 
-MAILCHIMP_API_KEY           = "f278d3c1cd861d90f0fd6119d24f35f5-us10"
+MAILCHIMP_API_KEY           = "f278d3c1cd864f35f5-us10"
 MAILCHIMP_DATA_CENTER       = "us10"
-MAILCHIMP_EMAIL_LIST_ID     = "f3d2fd2988"
+MAILCHIMP_EMAIL_LIST_ID     = "f3d2988"
 
 # ######## END MAILCHIMP settings ################
 

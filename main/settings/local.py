@@ -25,7 +25,7 @@ SECRET_KEY = '!8_2$ach(p%-(cks1*0a$x30+fz#x4bdo!c6)+dpu7y%-i6h=w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '*']
 
 
 # Application definition
@@ -199,16 +199,16 @@ EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
 DEFAULT_FROM_EMAIL = 'ps96068@gmail.com' #sendgrig sender email
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 SENDGRID_ECHO_TO_STDOUT=True
-SENDGRID_API_KEY = 'SG.c06FtbvMTPyBGZNhiP03nc4TEI-O9CZDsA'
+SENDGRID_API_KEY = 'SG.4RbkldWW-2_9nTW8'
 BASE_URL = 'http://127.0.0.1:8000'
 
 # ############### END Twilio SendGrid ###############
 
 # ######## MAILCHIMP settings ################
 
-MAILCHIMP_API_KEY           = "f278d3c1cd861d90f0fd6119d24f35f5-us10"
+MAILCHIMP_API_KEY           = "ad18b1c3dde8a72712dada9140-us10"
 MAILCHIMP_DATA_CENTER       = "us10"
-MAILCHIMP_EMAIL_LIST_ID     = "f3d2fd2988"
+MAILCHIMP_EMAIL_LIST_ID     = "66d12f"
 
 # ######## END MAILCHIMP settings ################
 
