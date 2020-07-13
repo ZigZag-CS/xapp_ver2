@@ -176,39 +176,22 @@ PHONENUMBER_DB_FORMAT = 'INTERNATIONAL'
 
 # ############### Twilio SendGrid ###############
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# DEFAULT_FROM_EMAIL = 'ps96068@gmail.com' #sendgrig sender email
-#
-# EMAIL_HOST = 'smtp.sendgrid.net'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'apikey'
-# EMAIL_HOST_PASSWORD = 'SG.kHy9AHDBQLVZmYhZT_hnM-I'
-
-
-# EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-# SENDGRID_SANDBOX_MODE_IN_DEBUG = False
-# FROM_EMAIL = 'ps96068@yahoo.com' # replace with your address
-# SENDGRID_API_KEY = 'SG.kHy9AHDByPOgYLVZmYhZT_hnM-I'
-
-
-
 # need  django-sendgrid-v5
 
 EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-DEFAULT_FROM_EMAIL = 'ps96068@gmail.com' #sendgrig sender email
+DEFAULT_FROM_EMAIL = 'zigzag.crl.com' #sendgrig sender email
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 SENDGRID_ECHO_TO_STDOUT=True
-SENDGRID_API_KEY = 'SG.4RbkldWW-2_9nTW8'
+SENDGRID_API_KEY = 'SG.rkVHzSFBj9xC3jSHPmJuaAyrg'
 BASE_URL = 'http://127.0.0.1:8000'
 
 # ############### END Twilio SendGrid ###############
 
 # ######## MAILCHIMP settings ################
 
-MAILCHIMP_API_KEY           = "ad18b1c3dde8a72712dada9140-us10"
+MAILCHIMP_API_KEY           = "c851f2b5b269-us10"
 MAILCHIMP_DATA_CENTER       = "us10"
-MAILCHIMP_EMAIL_LIST_ID     = "66d12f"
+MAILCHIMP_EMAIL_LIST_ID     = "07187"
 
 # ######## END MAILCHIMP settings ################
 

@@ -50,9 +50,10 @@ class AccountEmailActivateView(FormMixin, View):
 
     def get(self, request, key=None, *args, **kwargs):
         self.key = key
-        print(f'KEY >>>>>>>>>>>> {key} <<<<<<<<<<<<<<<')
+        # print(f'KEY >>>>>>>>>>>> {key} <<<<<<<<<<<<<<<')
         if key is not None:
             qs = EmailActivation.objects.filter(key__iexact=key)
+            # print(f'AccountEmailActivateView => get: {qs.EmailActivation}')
             confirm_qs = qs.confirmable()
             if confirm_qs.count() == 1:
                 obj = confirm_qs.first()
