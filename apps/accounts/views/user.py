@@ -216,9 +216,24 @@ class UserDetailUpdateView(LoginRequiredMixin ,UpdateView):
 
 
 class MyPasswordChangeView(PasswordChangeView):
-    template_name = 'accounts/password_change.html'
-    success_url = reverse_lazy('login')
+    template_name = 'accounts/registration/password_change.html'
+    success_url = reverse_lazy('password_change_done')
 
 class MyPasswordChangeDoneView(PasswordChangeDoneView):
-    template_name = 'accounts/password_change_done.html'
+    template_name = 'accounts/registration/password_change_done.html'
     title = _('Password change successful')
+
+class MyPasswordResetView(PasswordResetView):
+    template_name = 'accounts/registration/forgot-password.html'
+
+class MyPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'accounts/registration/password_reset_done.html'
+    title = _('Password reset sent')
+
+class MyPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'accounts/registration/password_reset_confirm.html'
+    title = _('Enter new password please')
+
+class MyPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'accounts/registration/password_reset_complete.html'
+    title = _('Malaghetz, Password reset complete')

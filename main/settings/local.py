@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # project apps
     'apps.pages.apps.PagesConfig',
     'apps.accounts.apps.AccountsConfig',
+    'apps.dashboard.apps.DashboardConfig',
 ]
 
 
@@ -80,7 +81,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'apps/pages/templates'),
             os.path.join(BASE_DIR, 'apps/accounts/templates'),
-            # os.path.join(BASE_DIR, 'apps/search/templates'),
+            os.path.join(BASE_DIR, 'apps/dashboard/templates'),
             # os.path.join(BASE_DIR, 'apps/carts/templates'),
             # os.path.join(BASE_DIR, 'apps/accounts/templates'),
             # os.path.join(BASE_DIR, 'apps/addresses/templates'),
@@ -154,6 +155,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, 'apps/pages/static'),
     os.path.join(BASE_DIR, 'apps/accounts/static'),
+    os.path.join(BASE_DIR, 'apps/dashboard/static'),
 
 ]
 
@@ -179,19 +181,19 @@ PHONENUMBER_DB_FORMAT = 'INTERNATIONAL'
 # need  django-sendgrid-v5
 
 EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-DEFAULT_FROM_EMAIL = 'zigzag.crl.com' #sendgrig sender email
+DEFAULT_FROM_EMAIL = 'zigzag.creil.com' #sendgrig sender email
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 SENDGRID_ECHO_TO_STDOUT=True
-SENDGRID_API_KEY = 'SG.rkVHzSFBj9xC3jSHPmJuaAyrg'
+SENDGRID_API_KEY = 'SG.rkVHzS1Bj9xC3jSHPmJuaAyrg'
 BASE_URL = 'http://127.0.0.1:8000'
 
 # ############### END Twilio SendGrid ###############
 
 # ######## MAILCHIMP settings ################
 
-MAILCHIMP_API_KEY           = "c851f2b5b269-us10"
+MAILCHIMP_API_KEY           = "c851f255a04f3b5b269-us10"
 MAILCHIMP_DATA_CENTER       = "us10"
-MAILCHIMP_EMAIL_LIST_ID     = "07187"
+MAILCHIMP_EMAIL_LIST_ID     = "075187"
 
 # ######## END MAILCHIMP settings ################
 

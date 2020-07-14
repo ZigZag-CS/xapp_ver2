@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Blank Page - X-App</title>
+    <meta name="description" content="X-App">
+
+    {% include 'dashboard/base/css.html' %}
+
+    {% block custom_css %} {% endblock custom_css %}
+</head>
+<body id="page-top">
+
+
+{% block content %} {% endblock %}
+
+
+
+{% include 'dashboard/base/js.html' %}
+
+
+</body>
+</html>
