@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Blank Page - X-App</title>
+    <meta name="description" content="X-App">
+
+    {% include 'supplyer/base/css.html' %}
+
+    {% block custom_css %} {% endblock custom_css %}
+</head>
+<body id="page-top">
+<div id="wrapper">
+
+    {% include 'supplyer/base/navbar-left.html' %}
+
+    <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                {% include 'supplyer/base/navbar-top.html' %}
+
+
+                 {% block content %} {% endblock %}
+
+
+
+
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © X-App 2020</span></div>
+                </div>
+            </footer>
+    </div>
+
+
+
+
+
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+
+{% include 'supplyer/base/js.html' %}
+
+</body>
+</html>

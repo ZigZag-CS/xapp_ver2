@@ -64,7 +64,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     email           = models.EmailField(max_length=255, unique=True)
     full_name       = models.CharField(max_length=255, blank=True, null=True)
-    avatar = models.ImageField(_("Avatar"), upload_to="client/", null=True, blank=True,
+    avatar          = models.ImageField(_("Avatar"), upload_to="client/", null=True, blank=True,
                                default='no_image_app_content.png')
     is_active       = models.BooleanField(default=True) # can login
     staff           = models.BooleanField(default=False) # staff user non superuser

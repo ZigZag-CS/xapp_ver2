@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     # project apps
     'apps.pages.apps.PagesConfig',
     'apps.accounts.apps.AccountsConfig',
+    'apps.customer.apps.CustomerConfig',
+    'apps.supplyer.apps.SupplyerConfig',
 
 
 ]
@@ -82,7 +84,8 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'apps/pages/templates'),
             os.path.join(BASE_DIR, 'apps/accounts/templates'),
-            os.path.join(BASE_DIR, 'apps/dashboard/templates'),
+            os.path.join(BASE_DIR, 'apps/customer/templates'),
+            os.path.join(BASE_DIR, 'apps/supplyer/templates'),
             # os.path.join(BASE_DIR, 'apps/carts/templates'),
             # os.path.join(BASE_DIR, 'apps/accounts/templates'),
             # os.path.join(BASE_DIR, 'apps/addresses/templates'),

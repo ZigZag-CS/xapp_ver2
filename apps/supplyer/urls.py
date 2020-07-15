@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 from django.urls import path, re_path
 
-from apps.dashboard.views import *
+from apps.supplyer.views import *
 
 
 
-app_name = "dashboard"
+app_name = "supplyer"
 
 urlpatterns = [
 
@@ -16,6 +15,4 @@ urlpatterns = [
     # re_path(r'^email/confirm/(?P<key>[0-9A-Za-z]+)/$', user.AccountEmailActivateView.as_view(), name='email-activate'),
     #
     # path('email/resend-activation/', user.AccountEmailActivateView.as_view(), name='resend-activation'),
-
 ]
-
