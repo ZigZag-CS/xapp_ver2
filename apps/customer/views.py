@@ -11,5 +11,12 @@ class AccountHomeView(LoginRequiredMixin, DetailView):
     model = User
     template_name = 'customer/dashboard.html'
 
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        print(f'get:context = {context}')
+        return self.render_to_response(context)
+
     def get_object(self):
+        print(f'get_object(self): {self.request.user}')
         return self.request.user
