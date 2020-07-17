@@ -8,9 +8,9 @@ app_name = "customer"
 
 urlpatterns = [
 
-    path('home/', AccountHomeView.as_view(), name='dashboard-home'),
+    path('home/', AccountHomeView.as_view(), name='customer-dashboard-home'),
 
-    # path('details/', user.UserDetailUpdateView.as_view(), name='user-update'),
+    path('profile/', CustomerDetailUpdateView.as_view(), name='customer-update'),
 
     # re_path(r'^email/confirm/(?P<key>[0-9A-Za-z]+)/$', user.AccountEmailActivateView.as_view(), name='email-activate'),
 
