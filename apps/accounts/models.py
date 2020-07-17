@@ -66,7 +66,6 @@ class User(AbstractBaseUser):
     full_name       = models.CharField(max_length=255, blank=True, null=True)
     avatar          = models.ImageField(_("Avatar"), upload_to="client/", null=True, blank=True,
                                default='no_image_app_content.png')
-    is_active       = models.BooleanField(default=True) # can login
     staff           = models.BooleanField(default=False) # staff user non superuser
     admin           = models.BooleanField(default=False) # superuser
     timestamp       = models.DateTimeField(auto_now_add=True)
@@ -74,6 +73,8 @@ class User(AbstractBaseUser):
     city            = models.CharField(max_length=255, blank=True, null=True)
     address         = models.CharField(max_length=255, blank=True, null=True)
     phone_number    = PhoneNumberField(blank=True)
+    phone_active    = models.BooleanField(default=False)
+    is_active       = models.BooleanField(default=True)  # can login
     is_traider      = models.BooleanField(default=False)
 
 

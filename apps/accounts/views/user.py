@@ -136,6 +136,7 @@ class LoginView(NextUrlMixin, RequestFormAttachMixin, FormView):
     def form_valid(self, form):
         print("form valid in LoginView")
         next_path = self.get_next_url()
+        print(f'LoginView : def form_valid - next_path: {next_path}')
         return redirect(next_path)
 
 

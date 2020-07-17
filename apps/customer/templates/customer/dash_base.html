@@ -15,7 +15,13 @@
 <body id="page-top">
 <div id="wrapper">
 
-    {% include 'customer/base/navbar-left.html' %}
+
+    {% if user.phone_active %}
+        {% include 'customer/base/navbar-left.html' %}
+    {% else %}
+        {% include 'customer/base/navbar-left-noph.html' %}
+    {% endif %}
+
 
     <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">

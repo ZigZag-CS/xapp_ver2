@@ -146,7 +146,7 @@ class LoginForm(forms.Form):
                     raise forms.ValidationError("This user is inactive.")
         user = authenticate(request, username=email, password=password)
         if user is None:
-            raise forms.ValidationError("Invalid credentials")
+            raise forms.ValidationError("Data iz invalid, suka")
         login(request, user)
         self.user = user
         return data

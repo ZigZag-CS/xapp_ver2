@@ -5,10 +5,29 @@
 
 {% block content %}
 
-    <div class="container-fluid">
-        <h3 class="text-dark mb-1"> Customer Dashboard, Blank Page</h3>
-        {{ user }}
-    </div>
+
+    {% if user.phone_active %}
+
+        <div class="container-fluid">
+            <h3 class="text-dark mb-1"> Customer Dashboard, Blank Page</h3>
+            {{ user }}
+            <hr>
+            {{ user.is_traider }}
+        </div>
+
+    {% else %}
+
+
+        <div class="container-fluid">
+            <h3 class="text-dark mb-1"> Customer Dashboard, Blank Page</h3>
+            {{ user }}
+            <hr>
+            <h2> Pentru a continua lucrul trebuie sa activati numarul de telefon! </h2>
+        </div>
+
+
+
+    {% endif %}
 
 
 {% endblock %}
