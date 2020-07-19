@@ -38,7 +38,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name="logout"),
 
     path('dashboardc/', include("apps.customer.urls", namespace='customer')),
-    path('dashboards/', include("apps.supplyer.urls", namespace='supplyer')),
+    path('dashboards/', include("apps.traider.urls", namespace='traider')),
 
     path('settings/', RedirectView.as_view(url='/account')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'apps.pages.apps.PagesConfig',
     'apps.accounts.apps.AccountsConfig',
     'apps.customer.apps.CustomerConfig',
-    'apps.supplyer.apps.SupplyerConfig',
+    'apps.traider.apps.TraiderConfig',
 ]
 
 
@@ -83,7 +83,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'apps/pages/templates'),
             os.path.join(BASE_DIR, 'apps/accounts/templates'),
             os.path.join(BASE_DIR, 'apps/customer/templates'),
-            os.path.join(BASE_DIR, 'apps/supplyer/templates'),
+            os.path.join(BASE_DIR, 'apps/traider/templates'),
             # os.path.join(BASE_DIR, 'apps/carts/templates'),
             # os.path.join(BASE_DIR, 'apps/accounts/templates'),
             # os.path.join(BASE_DIR, 'apps/addresses/templates'),
@@ -158,7 +158,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'apps/pages/static'),
     os.path.join(BASE_DIR, 'apps/accounts/static'),
     os.path.join(BASE_DIR, 'apps/customer/static'),
-    os.path.join(BASE_DIR, 'apps/supplyer/static'),
+    os.path.join(BASE_DIR, 'apps/traider/static'),
 
 ]
 

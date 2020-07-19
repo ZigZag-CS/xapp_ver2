@@ -1,10 +1,10 @@
 from django.urls import path, re_path
 
-from apps.supplyer.views import *
+from apps.traider.views import *
 
 
 
-app_name = "supplyer"
+app_name = "traider"
 
 urlpatterns = [
 

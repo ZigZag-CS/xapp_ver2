@@ -17,13 +17,17 @@
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Account</a>
+
                                 {% if user.is_traider %}
+
                                 <div class="dropdown-menu" role="menu">
-                                    <a class="dropdown-item" role="presentation" href="{% url 'supplyer:dashboard-home' %}">Dashboard</a>
+                                    <a class="dropdown-item" role="presentation" href="{% url 'traider:dashboard-home' %}">Dashboard</a>
                                     <a class="dropdown-item" role="presentation" href="#">Message to support</a>
                                     <a class="dropdown-item" role="presentation" href=" {% url 'logout' %} ">Logout</a>
                                 </div>
+
                                 {% else %}
+
                                 <div class="dropdown-menu" role="menu">
                                     <a class="dropdown-item" role="presentation" href="{% url 'customer:customer-dashboard-home' %}">Dashboard</a>
                                     <a class="dropdown-item" role="presentation" href="#">Message to support</a>

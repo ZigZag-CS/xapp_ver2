@@ -85,7 +85,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'apps/pages/templates'),
             os.path.join(BASE_DIR, 'apps/accounts/templates'),
             os.path.join(BASE_DIR, 'apps/customer/templates'),
-            os.path.join(BASE_DIR, 'apps/supplyer/templates'),
+            os.path.join(BASE_DIR, 'apps/traider/templates'),
             # os.path.join(BASE_DIR, 'apps/carts/templates'),
             # os.path.join(BASE_DIR, 'apps/accounts/templates'),
             # os.path.join(BASE_DIR, 'apps/addresses/templates'),
