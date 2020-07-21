@@ -3,7 +3,9 @@
 # from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib import messages
+from django.http import Http404
 from django.utils.translation import gettext_lazy as _
 
 # from django.urls import reverse
@@ -140,10 +142,32 @@ class LoginView(NextUrlMixin, RequestFormAttachMixin, FormView):
         return redirect(next_path)
 
 
-class RegisterView(CreateView):
+class RegisterView(UserPassesTestMixin, CreateView):
     form_class = RegisterForm
     template_name = 'accounts/register.html'
     success_url = '/'
+    error_url = '/404error/'
+
+    def test_func(self):
+        error_path = '/register'
+        user = str(self.request.user)
+        request = self.request.user
+        good_user = "AnonymousUser"
+        # print(f'RegisterView => test_func {type(user)}')
+        if user != good_user:
+            print(f"RegisterView => test_func in IF {self.request.user}")
+            # raise Http404("No MyModel matches the given query.")
+            # return redirect(self.error_url)
+            return render(request, '404.html', {})
+        else:
+            # print("inainte de reverse")
+            # return reverse('/register')
+            # return redirect(error_path)
+            return redirect(error_path)
+
+        #     print(f'RegisterView = {self.request.user}')
+
+
 
 
 class UserDetailUpdateView(LoginRequiredMixin ,UpdateView):

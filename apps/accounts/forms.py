@@ -184,6 +184,7 @@ class RegisterForm(forms.ModelForm):
     fields, plus a repeated password."""
     password = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(label="Confirm pass", widget=forms.PasswordInput)
+    agree = forms.BooleanField(label="Confirm agreement", widget=forms.CheckboxInput)
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -206,4 +207,4 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('full_name', 'email',)  # 'full_name',)
+        fields = ('full_name', 'email', )  # 'full_name',)

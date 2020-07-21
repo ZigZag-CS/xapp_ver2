@@ -20,11 +20,13 @@ from django.urls import path, include
 from django.views.generic import RedirectView
 from django.contrib.auth.views import LogoutView
 
+from .views import eroare_404
 
 from apps.accounts.views import user, client, traider
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('404error/', eroare_404, name="404error"),
 
     path("", include("apps.pages.urls", namespace='pages')),
 
