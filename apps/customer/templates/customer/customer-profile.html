@@ -3,199 +3,142 @@
 
 
 {% block content %}
-
-
-    <div class="container-fluid">
+<div class="container-fluid">
                     <h3 class="text-dark mb-4">Profile - {{ user.email }}</h3>
+</div>
 
+    <form>
+            <div class="card shadow mb-5">
 
-        <form>
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 font-weight-bold">User Details</p>
+                    </div>
 
-            <div class="row mb-3">
+                    <div class="row mb-3">
 
+                        <div class="col-lg-4">
 
-
-                            <div class="col-lg-4">
-                                <div class="card mb-3">
-                                    <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="{{ user.avatar.url }}" width="160" height="160">
-                                        <div class="mb-3">
-                                            <input type="file" name="avatar" accept="image/*" id="id_avatar">
-                                        </div>
+                            <div class="card mb-3" style="margin: 10px;">
+                                <div class="card-body text-center shadow">
+                                    <img class="rounded-circle mb-3 mt-4" src="{{ user.avatar.url }}" width="160" height="160">
+                                    <div class="mb-3">
+                                        <input type="file" name="avatar" accept="image/*" id="id_avatar">
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
 
                         <div class="col-lg-8">
-
                             <div class="row">
                                 <div class="col">
-                                    <div class="card shadow mb-3">
-                                        <div class="card-header py-3">
-                                            <p class="text-primary m-0 font-weight-bold">User Details</p>
-                                        </div>
+                                    <div class="card shadow mb-3" style="margin: 10px;">
                                         <div class="card-body">
 
-                                                <div class="form-row">
+                                            <div class="form-row">
 
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="full_name">
-                                                                <strong>Full name</strong>
-                                                            </label>
-                                                            <input class="form-control" type="text" placeholder="full name" name="full_name" class="vTextField" maxlength="255" id="id_full_name">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="email">
-                                                                <strong>Email Address</strong>
-                                                            </label>
-                                                            <input class="form-control" type="email" placeholder="user@example.com" name="email" value="" class="vTextField" maxlength="255" required="" id="id_email">
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="form-row">
-
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="first_name">
-                                                                <strong>First Name</strong>
-                                                            </label>
-                                                            <input class="form-control" type="text" placeholder="John" name="first_name">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="last_name">
-                                                                <strong>Last Name</strong>
-                                                            </label>
-                                                            <input class="form-control" type="text" placeholder="Doe" name="last_name">
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="form-row">
-
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="first_name">
-                                                                <strong>First Name</strong>
-                                                            </label>
-                                                            <input class="form-control" type="text" placeholder="John" name="first_name">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="last_name">
-                                                                <strong>Last Name</strong>
-                                                            </label>
-                                                            <input class="form-control" type="text" placeholder="Doe" name="last_name">
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="form-row">
-
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="first_name">
-                                                                <strong>First Name</strong>
-                                                            </label>
-                                                            <input class="form-control" type="text" placeholder="John" name="first_name">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="last_name">
-                                                                <strong>Last Name</strong>
-                                                            </label>
-                                                            <input class="form-control" type="text" placeholder="Doe" name="last_name">
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-
-
-
-
-
-
-
-
-                                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="card shadow">
-                                        <div class="card-header py-3">
-                                            <p class="text-primary m-0 font-weight-bold">Contact Settings</p>
-                                        </div>
-                                        <div class="card-body">
-
-                                            <form>
-                                                <div class="form-group"><label for="address"><strong>Address</strong></label><input class="form-control" type="text" placeholder="Sunset Blvd, 38" name="address"></div>
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <div class="form-group"><label for="city"><strong>City</strong></label><input class="form-control" type="text" placeholder="Los Angeles" name="city"></div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group"><label for="country"><strong>Country</strong></label><input class="form-control" type="text" placeholder="USA" name="country"></div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="full_name">
+                                                            <strong>Full name</strong>
+                                                        </label>
+                                                        <input class="form-control vTextField" type="text" placeholder="full name" name="full_name" maxlength="255" id="id_full_name">
                                                     </div>
                                                 </div>
-                                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save&nbsp;Settings</button></div>
-                                            </form>
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="email">
+                                                            <strong>Email Address</strong>
+                                                            <input type="checkbox" name="email_active" style="color: green;" checked disabled>
+                                                            <label><small>email is activated</small></label>
+                                                        </label>
+                                                        <input class="form-control vTextField" type="email" placeholder="user@example.com" name="email" value="" maxlength="255" required="" id="id_email">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-row">
+
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="first_name">
+                                                            <strong>Country</strong>
+                                                        </label>
+                                                        <input class="form-control" type="text" placeholder="country" name="Country">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="last_name">
+                                                            <strong>Phone numper</strong>
+                                                            <input type="checkbox" name="phone_active" style="color: green;" checked disabled>
+                                                            <label><small>phone numper is activated</small></label>
+                                                        </label>
+                                                        <input class="form-control" type="text" placeholder="+ <code> <number>" name="phone">
+                                                    </div>
+                                                </div>
+
+                                            </div>
 
 
-                    </div>
+                                            <div class="form-row">
 
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="city">
+                                                            <strong>City</strong>
+                                                        </label>
+                                                        <input class="form-control" type="text" placeholder="city" name="city">
+                                                    </div>
+                                                </div>
 
-                    <div class="card shadow mb-5">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="Address">
+                                                            <strong>Address</strong>
+                                                        </label>
+                                                        <input class="form-control" type="text" placeholder="Doe" name="Address">
+                                                    </div>
+                                                </div>
 
-                        <div class="card-header py-3">
-                            <p class="text-primary m-0 font-weight-bold">Forum Settings</p>
-                        </div>
+                                            </div>
+<!--
+                                            <div class="form-row">
 
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <form>
-                                        <div class="form-group"><label for="signature"><strong>Signature</strong><br></label><textarea class="form-control" rows="4" name="signature"></textarea></div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="first_name">
+                                                            <strong>First Name</strong>
+                                                        </label>
+                                                        <input class="form-control" type="text" placeholder="John" name="first_name">
+                                                    </div>
+                                                </div>
 
-                                        <div class="form-group">
-                                            <div class="custom-control custom-switch">
-                                                <input class="custom-control-input" type="checkbox" id="formCheck-1">
-                                                <label class="custom-control-label" for="formCheck-1">
-                                                    <strong>Notify me about new replies</strong>
-                                                </label>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="last_name">
+                                                            <strong>Last Name</strong>
+                                                        </label>
+                                                        <input class="form-control" type="text" placeholder="Doe" name="last_name">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+-->
+                                            <div class="form-group">
+                                                <button class="btn btn-primary btn-sm" type="submit">Save Settings</button>
                                             </div>
                                         </div>
-
-                                        <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-    </div>
+            </div>
 
-
-
+        </form>
 
 {% endblock %}
