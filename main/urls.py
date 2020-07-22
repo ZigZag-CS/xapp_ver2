@@ -22,6 +22,7 @@ from django.contrib.auth.views import LogoutView
 
 from .views import eroare_404
 
+
 from apps.accounts.views import user, client, traider
 
 urlpatterns = [

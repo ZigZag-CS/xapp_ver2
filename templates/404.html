@@ -1,12 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Page Not Found - X-App</title>
+    <meta name="description" content="X-App">
+    <link rel="stylesheet" href=" {% static 'main/css/bootstrap/css/bootstrap.min.css' %} ">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div class="container-fluid">
+                <div class="text-center mt-5">
+                    <div class="error mx-auto" data-text="404">
+                        <p class="m-0">404</p>
+                    </div>
+                    <p class="text-dark mb-5 lead">Page nu-i Found</p>
+                    <p class="text-black-50 mb-0">It looks like you found a glitch in the matrix...</p><a href="/">← Dute-n Home page</a></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src=" {% static 'main/js/script.min.js' %} "></script>
 
 
 
+</body>
 
-<div class='row'>
-<div class='col text-center'>
-
-    <h1 class='my-5'>Page Not Found, dute-n kizda mati</h1>
-    <p>404 Error</p>
-
-</div>
-</div>
+</html>
