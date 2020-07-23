@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 from django import forms
+from django.forms import ModelForm
+from django_countries.widgets import CountrySelectWidget
 
 from apps.accounts.models import User
 
 
-class CustomerDetailChangeForm(forms.ModelForm):
-    full_name = forms.CharField(
-        label="Name",
-        required=False,
-        widget = forms.TextInput(attrs={"class": "form-control"})
-    )
+class CustomerDetailUpdateForm(ModelForm):
+    # full_name = forms.CharField()
+
 
     class Meta:
         model = User
-        fields = ['full_name']
+        # fields = '__all__'
+        fields = ['full_name', 'country', 'city', 'address', 'phone_number' ]
+        # fields = ['full_name', 'avatar', 'country', 'city', 'address', 'phone_number' ]
+        # widgets = {'country': CountrySelectWidget()}

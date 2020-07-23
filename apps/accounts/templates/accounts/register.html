@@ -18,8 +18,8 @@
                     </div>
                     <form method="post" class="user">
 
-                    {% csrf_token %}
-                    {{ form.non_field_errors }}
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
 
                         <div class="form-group">
                             <input class="form-control form-control-user" type="email" name="email" id="id_email" required aria-describedby="emailHelp" placeholder="Email Address" >
@@ -36,11 +36,6 @@
 
                         </div>
 
-{#                        <div class="text-center mb-4">#}
-{#                            <input type="checkbox" name="agree" id="id_agree" required />#}
-{#                            <small>Sunt deacord cu regulile si politice companiei</small>#}
-{#                        </div>#}
-
                         <div class="form-group mb-4">
                             <div class="custom-control custom-switch">
                                 <input class="custom-control-input" type="checkbox" name="agree" id="id_agree" required />
@@ -53,7 +48,7 @@
 
                         <button type="submit" class="btn btn-primary btn-block text-white btn-user" >Register Account</button>
                         <hr>
-
+                    </form>
                         <a class="btn btn-primary btn-block text-white btn-google btn-user" role="button">
                             <i class="fab fa-google"></i>&nbsp; Register with Google
                         </a>
@@ -72,7 +67,7 @@
 
                         <hr>
 
-                    </form>
+
                             <div class="text-center"><a class="small" href="#">Forgot Password?</a></div>
                             <div class="text-center"><a class="small" href="{% url 'login' %}">Already have an account? Login!</a></div>
                         </div>

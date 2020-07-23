@@ -7,7 +7,10 @@
                     <h3 class="text-dark mb-4">Profile - {{ user.email }}</h3>
 </div>
 
-    <form>
+    <form method='POST' action="{% if action_url %} {{ action_url }} {% endif %}">
+
+        {% csrf_token %}
+
             <div class="card shadow mb-5">
 
                     <div class="card-header py-3">
@@ -21,9 +24,13 @@
                             <div class="card mb-3" style="margin: 10px;">
                                 <div class="card-body text-center shadow">
                                     <img class="rounded-circle mb-3 mt-4" src="{{ user.avatar.url }}" width="160" height="160">
+
                                     <div class="mb-3">
+
                                         <input type="file" name="avatar" accept="image/*" id="id_avatar">
+
                                     </div>
+
                                 </div>
                             </div>
 
@@ -33,27 +40,32 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="card shadow mb-3" style="margin: 10px;">
+
                                         <div class="card-body">
 
                                             <div class="form-row">
 
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="full_name">
+                                                        <label for="id_full_name">
                                                             <strong>Full name</strong>
                                                         </label>
-                                                        <input class="form-control vTextField" type="text" placeholder="full name" name="full_name" maxlength="255" id="id_full_name">
+
+                                                        <input class="form-control vTextField" type="text" value="{{ user.full_name }}" name="full_name" maxlength="255" id="id_full_name">
+
                                                     </div>
                                                 </div>
 
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="email">
+                                                        <label for="id_email">
                                                             <strong>Email Address</strong>
                                                             <input type="checkbox" name="email_active" style="color: green;" checked disabled>
-                                                            <label><small>email is activated</small></label>
+                                                            <small>email is activated</small>
                                                         </label>
-                                                        <input class="form-control vTextField" type="email" placeholder="user@example.com" name="email" value="" maxlength="255" required="" id="id_email">
+
+                                                        <input class="form-control vTextField" type="email" value="{{ user.email }}" value="{{ user.email }}" name="email" maxlength="255" required="" id="id_email">
+
                                                     </div>
                                                 </div>
 
@@ -63,82 +75,97 @@
 
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="first_name">
+                                                        <label for="country">
                                                             <strong>Country</strong>
                                                         </label>
-                                                        <input class="form-control" type="text" placeholder="country" name="Country">
+                                                        <input class="form-control" type="text" value="{{ user.country.name }}" name="country">
                                                     </div>
                                                 </div>
 
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="last_name">
+
+                                                        <label for="id_phone_number">
                                                             <strong>Phone numper</strong>
-                                                            <input type="checkbox" name="phone_active" style="color: green;" checked disabled>
-                                                            <label><small>phone numper is activated</small></label>
+
+                                                            {% if user.phone_active %}
+                                                                <input type="checkbox" name="phone_active" style="color: green;" checked disabled>
+                                                                <small>phone numper is activated</small>
+                                                            {% else %}
+                                                                <input type="checkbox" name="phone_active" style="color: green;" disabled>
+                                                                <small>phone numper is <bold style="color: red">not activated</bold></small>
+                                                                <small><a href="#">[ phone activation ]</a></small>
+                                                            {% endif%}
+
                                                         </label>
-                                                        <input class="form-control" type="text" placeholder="+ <code> <number>" name="phone">
+
+                                                        <input class="form-control" type="tel" value="{{ user.phone_number }}" name="phone_number" id="id_phone_number">
+
                                                     </div>
                                                 </div>
 
                                             </div>
 
-
                                             <div class="form-row">
 
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="city">
+                                                        <label for="id_city">
                                                             <strong>City</strong>
                                                         </label>
-                                                        <input class="form-control" type="text" placeholder="city" name="city">
+                                                        <input class="form-control" type="text" value="{{ user.city }}" name="city" id="id_city">
                                                     </div>
                                                 </div>
 
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="Address">
+                                                        <label for="id_address">
                                                             <strong>Address</strong>
                                                         </label>
-                                                        <input class="form-control" type="text" placeholder="Doe" name="Address">
+                                                        <input class="form-control" type="text" value="{{ user.address }}" name="address" id="id_address">
                                                     </div>
                                                 </div>
 
                                             </div>
-<!--
-                                            <div class="form-row">
 
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label for="first_name">
-                                                            <strong>First Name</strong>
-                                                        </label>
-                                                        <input class="form-control" type="text" placeholder="John" name="first_name">
-                                                    </div>
-                                                </div>
 
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label for="last_name">
-                                                            <strong>Last Name</strong>
-                                                        </label>
-                                                        <input class="form-control" type="text" placeholder="Doe" name="last_name">
-                                                    </div>
-                                                </div>
 
-                                            </div>
--->
-                                            <div class="form-group">
-                                                <button class="btn btn-primary btn-sm" type="submit">Save Settings</button>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
+                    <div class="card shadow mb-5">
+
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-md-6" style="border-right: 2px solid black">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-switch" style="text-align: right;">
+                                            <input class="custom-control-input" type="checkbox" id="formCheck-1" required >
+                                            <label class="custom-control-label" for="formCheck-1">
+                                                <strong>Yes, salveaza blea o data</strong>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-sm" type="submit">Save Data</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
             </div>
 
-        </form>
+    </form>
 
 {% endblock %}
