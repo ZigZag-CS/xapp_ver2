@@ -73,8 +73,11 @@ class User(AbstractBaseUser):
     city            = models.CharField(max_length=255, blank=True, null=True)
     address         = models.CharField(max_length=255, blank=True, null=True)
     phone_number    = PhoneNumberField(blank=True)
-    phone_active    = models.BooleanField(default=False)
+
+
     is_active       = models.BooleanField(default=True)  # can login
+    # email_active    = models.BooleanField(default=True)  # can login
+    phone_active    = models.BooleanField(default=False) # can login
     is_traider      = models.BooleanField(default=False)
 
 
