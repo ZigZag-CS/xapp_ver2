@@ -39,28 +39,19 @@ class CustomerDetailUpdateView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
     def get_context_data(self, *args, **kwargs):
-        context = super(CustomerDetailUpdateView, self).get_context_data(*args, **kwargs)
+        context = super().get_context_data(*args, **kwargs)
         # context['title'] = 'Change Your account details'
-        # print(f"CustomerDetailUpdateView => get_context_data => context[form] = {context['form']} ")
+        print(f"CustomerDetailUpdateView => get_context_data => context[form] = {context['form']} ")
         return context
 
     def get_success_url(self):
         return reverse("customer:dashboard-home")
 
-    def get_form_kwargs(self):
-        """
-        Returns the keyword arguments for instantiating the form.
-        """
-        kwargs = super(ModelFormMixin, self).get_form_kwargs()
-        if hasattr(self, 'object'):
-            kwargs.update({'instance': self.object})
-        print(f'kwargs = {kwargs}')
-        return kwargs
-
-    # def form_valid(self, form):
-    #     # Сохраняем данные полученные из POST
-    #     # self.object = form.save(commit = False)
-    #     instance = form.save()
-    #     print(f'CustomerDetailUpdateView =>form_valid=> intsance = {instance}')
-    #     instance.save()
-    #     return super(CustomerDetailUpdateView, self).form_valid(form)
+    def form_valid(self, form):
+        # Сохраняем данные полученные из POST
+        # self.object = form.save(commit = False)
+        # instance = form.save()
+        # print(f'CustomerDetailUpdateView =>form_valid=> intsance = {instance}')
+        # instance.save()
+        print(form.cleaned_data)
+        return super().form_valid(form)
