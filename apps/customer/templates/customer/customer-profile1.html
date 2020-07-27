@@ -1,0 +1,224 @@
+{% extends 'customer/dash_base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container-fluid">
+                    <h3 class="text-dark mb-4">Profile - {{ user.email }}</h3>
+</div>
+
+    <form method='POST' action="{% if action_url %} {{ action_url }} {% endif %}">
+
+        {% csrf_token %}
+        {{ form.non_field.errors }}
+            <div class="card shadow mb-5">
+
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 font-weight-bold">User Details</p>
+                    </div>
+
+                    <div class="row mb-3">
+
+                        <div class="col-lg-4">
+
+                            <div class="card mb-3" style="margin: 10px;">
+                                <div class="card-body text-center shadow">
+                                    <img class="rounded-circle mb-3 mt-4" src="{{ user.avatar.url }}" width="160" height="160">
+
+                                    <div class="mb-3">
+
+                                        <input type="file" name="avatar" accept="image/*" id="id_avatar">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card shadow mb-3" style="margin: 10px;">
+
+                                        <div class="card-body">
+
+                                            <div class="form-row">
+
+                                                <div class="col">
+                                                    <div class="form-group">
+
+                                                        <label for="{{ form.full_name.id_for_full_name }}">
+                                                            <strong>Full name</strong>
+                                                        </label>
+
+                                                        {{ form.full_name}}
+                                                        <div class="invalid-feedback">
+                                                            {{ form.full_name.errors }}
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col">
+                                                    <div class="form-group">
+<!--                                                        <label for="id_email">-->
+<!--                                                            <strong>Email Address</strong>-->
+<!--                                                            <input type="checkbox" name="email_active" style="color: green;" checked disabled>-->
+<!--                                                            <small>email is activated</small>-->
+<!--                                                        </label>-->
+
+<!--                                                        <input class="form-control vTextField" type="email" value="{{ user.email }}" value="{{ user.email }}" name="email" maxlength="255" required="" id="id_email">-->
+                                                        <label for="{{ form.email.id_for_email }}">
+                                                            <strong>Email Address</strong>
+
+                                                            {% if user.is_active %}
+                                                                <input type="checkbox" name="email_active" style="color: green;" checked disabled>
+                                                                <small>email is activated</small>
+                                                            {% else %}
+                                                                <input type="checkbox" name="phone_active" style="color: green;" disabled>
+                                                                <small>email is <bold style="color: red">not activated</bold></small>
+                                                                <small><a href="#">[ email activation ]</a></small>
+                                                            {% endif %}
+                                                        </label>
+
+                                                        {{ form.email }}
+
+<!--                                                        <input class="form-control vTextField" type="email" value="{{ user.email }}" value="{{ user.email }}" name="email" maxlength="255" required="" id="id_email">-->
+
+                                                        <div class="invalid-feedback">
+                                                            {{ form.email.errors }}
+                                                        </div>
+
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-row">
+
+                                                <div class="col">
+                                                    <div class="form-group">
+
+                                                        <label for="{{ form.country.id_for_country }}">
+                                                            <strong>Country</strong>
+                                                        </label>
+                                                        {{ form.country }}
+                                                        <div class="invalid-feedback">
+                                                            {{ form.country.errors }}
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col">
+                                                    <div class="form-group">
+
+                                                        <label for="id_phone_number">
+                                                            <strong>Phone numper</strong>
+
+                                                            {% if user.phone_active %}
+                                                                <input type="checkbox" name="phone_active" style="color: green;" checked disabled>
+                                                                <small>phone numper is activated</small>
+                                                            {% else %}
+                                                                <input type="checkbox" name="phone_active" style="color: green;" disabled>
+                                                                <small>phone numper is <bold style="color: red">not activated</bold></small>
+                                                                <small><a href="#">[ phone activation ]</a></small>
+                                                            {% endif%}
+
+                                                        </label>
+
+                                                        <input class="form-control" type="tel" value="{{ user.phone_number }}" name="phone_number" id="id_phone_number">
+
+
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-row">
+
+                                                <div class="col">
+                                                    <div class="form-group">
+
+                                                        <label for="{{ form.city.id_for_city }}">
+                                                            <strong>City</strong>
+                                                        </label>
+
+                                                        {{ form.city}}
+                                                        <div class="invalid-feedback">
+                                                            {{ form.city.errors }}
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col">
+                                                    <div class="form-group">
+
+                                                        <label for="{{ form.address.id_for_address }}">
+                                                            <strong>Address</strong>
+                                                        </label>
+
+                                                        {{ form.address}}
+                                                        <div class="invalid-feedback">
+                                                            {{ form.address.errors }}
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="card shadow mb-5">
+
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-md-6" style="border-right: 2px solid black">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-switch" style="text-align: right;">
+                                            <input class="custom-control-input" type="checkbox" id="formCheck-1" required >
+                                            <label class="custom-control-label" for="formCheck-1">
+                                                <strong>Yes, salveaza blea o data</strong>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+{{ form.as_p }}
+                                    </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-sm" type="submit">Save Data</button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+
+    </form>
+
+{% endblock %}

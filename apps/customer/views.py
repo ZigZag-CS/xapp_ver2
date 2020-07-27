@@ -9,7 +9,7 @@ from apps.accounts.models import User
 from django.views.generic import CreateView, FormView, DetailView, View, UpdateView
 
 #LoginRequiredMixin,
-from .forms import CustomerDetailUpdateForm
+from .forms import CustomerDetailUpdateForm, CustomerDetailUpdateForm1
 
 
 @method_decorator(customer_required, name='dispatch')
@@ -55,3 +55,18 @@ class CustomerDetailUpdateView(LoginRequiredMixin, UpdateView):
         # instance.save()
         print(form.cleaned_data)
         return super().form_valid(form)
+
+
+@method_decorator(customer_required, name='dispatch')
+class CustomerDetailUpdateView1(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = CustomerDetailUpdateForm1
+    template_name = 'customer/customer-profile1.html'
+
+    def get_object(self):
+        # print(forms.context_data)
+        return self.request.user
+
+    def get_success_url(self):
+        return reverse("account:home")
+
