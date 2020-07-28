@@ -129,7 +129,7 @@ class GuestRegisterView(NextUrlMixin, RequestFormAttachMixin, CreateView):
 #             return redirect("/register/")
 #     return redirect("/register/")
 
-
+@method_decorator(anonymous_required(redirect_url = '/'), name='dispatch')
 class LoginView(NextUrlMixin, RequestFormAttachMixin, FormView):
     form_class = LoginForm
     success_url = '/'
