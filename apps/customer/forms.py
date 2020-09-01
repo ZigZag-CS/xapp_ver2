@@ -31,5 +31,6 @@ class CustomerDetailUpdateForm1(ModelForm):
             'address': forms.TextInput(attrs={'class': 'form-control'}),
             'city': forms.TextInput(attrs={'class': 'form-control'}),
             'country': forms.Select(attrs={'class': 'form-control'})
+            # 'avatar': forms.ClearableFileInput(attrs={'multiple': False})
             # 'country': CountrySelectWidget()
         }
