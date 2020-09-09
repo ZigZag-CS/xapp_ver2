@@ -226,6 +226,10 @@ class MyPasswordChangeView(PasswordChangeView):
     template_name = 'accounts/registration/password_change.html'
     success_url = reverse_lazy('password_change_done')
 
+class MyPasswordChangeView1(PasswordChangeView):
+    template_name = 'accounts/registration/password_change1.html'
+    success_url = reverse_lazy('password_change_done')
+
 class MyPasswordChangeDoneView(PasswordChangeDoneView):
     template_name = 'accounts/registration/password_change_done.html'
     title = _('Password change successful')

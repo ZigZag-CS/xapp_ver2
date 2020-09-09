@@ -30,31 +30,43 @@ class AccountHomeView(LoginRequiredMixin, DetailView):
 @method_decorator(customer_required, name='dispatch')
 class CustomerDetailUpdateView(LoginRequiredMixin, UpdateView):
     model = User
-    form_class = CustomerDetailUpdateForm
-    template_name = 'customer/customer-profile.html'
-
-    # success_url = '/account/'
+    form_class = CustomerDetailUpdateForm1
+    template_name = 'customer/customer-profile1.html'
 
     def get_object(self):
+        # print(forms.context_data)
         return self.request.user
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        # context['title'] = 'Change Your account details'
-        print(f"CustomerDetailUpdateView => get_context_data => context[form] = {context['form']} ")
-        return context
-
     def get_success_url(self):
-        return reverse("customer:dashboard-home")
+        return reverse("customer:customer-update")
 
-    def form_valid(self, form):
-        # Сохраняем данные полученные из POST
-        # self.object = form.save(commit = False)
-        # instance = form.save()
-        # print(f'CustomerDetailUpdateView =>form_valid=> intsance = {instance}')
-        # instance.save()
-        print(form.cleaned_data)
-        return super().form_valid(form)
+
+    # model = User
+    # form_class = CustomerDetailUpdateForm
+    # template_name = 'customer/customer-profile.html'
+    #
+    # # success_url = '/account/'
+    #
+    # def get_object(self):
+    #     return self.request.user
+    #
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super().get_context_data(*args, **kwargs)
+    #     # context['title'] = 'Change Your account details'
+    #     print(f"CustomerDetailUpdateView => get_context_data => context[form] = {context['form']} ")
+    #     return context
+    #
+    # def get_success_url(self):
+    #     return reverse("customer:dashboard-home")
+    #
+    # def form_valid(self, form):
+    #     # Сохраняем данные полученные из POST
+    #     # self.object = form.save(commit = False)
+    #     # instance = form.save()
+    #     # print(f'CustomerDetailUpdateView =>form_valid=> intsance = {instance}')
+    #     # instance.save()
+    #     print(form.cleaned_data)
+    #     return super().form_valid(form)
 
 
 @method_decorator(customer_required, name='dispatch')

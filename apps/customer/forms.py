@@ -8,16 +8,28 @@ from apps.accounts.models import User
 
 
 class CustomerDetailUpdateForm(ModelForm):
-    # full_name = forms.CharField()
-
-
 
     class Meta:
         model = User
-        # fields = '__all__'
-        fields = ['email', 'full_name', 'country', 'city', 'address', 'phone_number' ]
-        # fields = ['full_name', 'avatar', 'country', 'city', 'address', 'phone_number' ]
-        # widgets = {'country': CountrySelectWidget()}
+        fields = ['email', 'full_name', 'avatar', 'country', 'city', 'address', 'phone_number']
+        widgets = {
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'full_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'country': forms.Select(attrs={'class': 'form-control'})
+            # 'avatar': forms.ClearableFileInput(attrs={'multiple': False})
+            # 'country': CountrySelectWidget()
+        }
+
+    # full_name = forms.CharField()
+
+    # class Meta:
+    #     model = User
+    #     # fields = '__all__'
+    #     fields = ['email', 'full_name', 'country', 'city', 'address', 'phone_number' ]
+    #     # fields = ['full_name', 'avatar', 'country', 'city', 'address', 'phone_number' ]
+    #     # widgets = {'country': CountrySelectWidget()}
 
 
 class CustomerDetailUpdateForm1(ModelForm):
