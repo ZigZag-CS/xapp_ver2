@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.utils.decorators import method_decorator
 from django.contrib import messages
-from django.http import Http404
+from django.http import Http404, request
 from django.utils.translation import gettext_lazy as _
 
 # from django.urls import reverse
@@ -24,6 +24,7 @@ from django.views.generic.edit import FormMixin
 
 from ..mixins import NextUrlMixin, RequestFormAttachMixin
 from ..forms import *
+from django.contrib.auth.forms import PasswordChangeForm
 from ..models import *
 from ..decorators import anonymous_required
 
@@ -227,8 +228,16 @@ class MyPasswordChangeView(PasswordChangeView):
     success_url = reverse_lazy('password_change_done')
 
 class MyPasswordChangeView1(PasswordChangeView):
+    statuschange_form_class = StatusChangeForm
     template_name = 'accounts/registration/password_change1.html'
     success_url = reverse_lazy('password_change_done')
+
+    def get(self, request):
+        pass_form = self.form_class
+        status_form = self.statuschange_form_class
+        return render(request, self.template_name, {'pass_form': pass_form, 'status_form':status_form})
+
+
 
 class MyPasswordChangeDoneView(PasswordChangeDoneView):
     template_name = 'accounts/registration/password_change_done.html'

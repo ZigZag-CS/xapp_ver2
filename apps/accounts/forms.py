@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth import get_user_model, login, authenticate
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.utils.safestring import mark_safe
@@ -219,3 +220,16 @@ class RegisterForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('full_name', 'email', )  # 'full_name',)
+
+
+# class StatusChangeForm(forms.Form):
+class StatusChangeForm(forms.ModelForm):
+    # fild1 = forms.BooleanField(label="Customer")
+    # fild2 = forms.BooleanField(label="Traider")
+
+    class Meta:
+        model = User
+        fields = ('is_traider',)
+        # widgets = {
+        #     'is_traider': forms.BooleanField
+        # }
