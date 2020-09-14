@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<style>
+		/**{padding: 0;margin: 0}*/
+		/*#menu{height: 100vh;width: 400px;background-color: rgba(1,1,1,0.1)}*/
+		#radio{display: none;margin-top: 10px}
+		#button:checked~#radio{display: block}
+		#button{display: none}
+		#btn{border: 2px solid black}
+	</style>
+</head>
+<body>
+	<div id="menu"> 
+		<input type="checkbox" id="button"><label for="button" id="btn">click</label>
+
+
+		<form action="" id="radio">
+
+				<label for="radio1">Self employed</label>
+				<input type="radio" name="one" value="1" id="radio1">
+
+				<label for="radio2">Company</label>
+				<input type="radio" name="one" value="2" id="radio2">
+
+		</form>
+
+
+	</div>
+</body>
+</html>

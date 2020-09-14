@@ -233,6 +233,7 @@ class MyPasswordChangeView1(PasswordChangeView):
     success_url = reverse_lazy('password_change_done')
 
     def get(self, request):
+        # print(f' ====== forma pu change pass {self.form_class} ======')
         pass_form = self.form_class
         status_form = self.statuschange_form_class
         return render(request, self.template_name, {'pass_form': pass_form, 'status_form':status_form})
