@@ -1,12 +1,5 @@
 
-
-        #radio {display: none;margin-top: 10px}
-		#button:checked~#radio {display: block}
-		#button {display: none}
-		#btn {border: 2px solid black}
-
-
-#status11 {display: none;margin-top: 10px}
-#button11:checked~#status11 {display: block}
-/*#button11 {display: none}*/
+#status11 {display: none; margin-top: 10px}
+#button11:checked ~ #status11 {display: block}
+#button11 {display: none}
 #btn11 {border: 2px solid black; padding: 5px}

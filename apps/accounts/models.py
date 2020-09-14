@@ -62,6 +62,11 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    TRAIDER_STATUS = (
+        ('1', 'Company'),
+        ('2', 'Self employed'),
+    )
+
     email           = models.EmailField(max_length=255, unique=True)
     full_name       = models.CharField(max_length=255, blank=True, null=True)
     avatar          = models.ImageField(_("Avatar"), upload_to="client/", null=True, blank=True,
@@ -78,7 +83,8 @@ class User(AbstractBaseUser):
     is_active       = models.BooleanField(default=True)  # can login
     # email_active    = models.BooleanField(default=True)  # can login
     phone_active    = models.BooleanField(default=False) # can login
-    is_traider      = models.BooleanField(default=False)
+    # is_traider      = models.BooleanField(default=False)
+    is_traider = models.IntegerField(default=0, blank=True, null=True, choices=TRAIDER_STATUS)
 
 
 
