@@ -24,7 +24,7 @@ DEFAULT_ACTIVATION_DAYS = getattr(settings, 'DEFAULT_ACTIVATION_DAYS', 7)
 class UserManager(BaseUserManager):
 
     # aceasta metoda e strict legata de crearea utilizatorului si de REQUIRED_FIELDS din modelul utilizatorului
-    def create_user(self, email, full_name=None, password=None, is_active=True, is_staff=False, is_admin=False):
+    def create_user(self, email, full_name=None, password=None, is_active=True, is_staff=False, is_admin=False, is_traider=0):
         if not email:
             raise ValueError("Users must have an email address")
         if not password:
@@ -38,6 +38,7 @@ class UserManager(BaseUserManager):
         user_obj.staff = is_staff
         user_obj.admin = is_admin
         user_obj.active = is_active
+        user_obj.is_traider = is_traider
         user_obj.save(using=self._db)
         return user_obj
 
@@ -63,8 +64,9 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     TRAIDER_STATUS = (
-        ('1', 'Company'),
-        ('2', 'Self employed'),
+        (0, 'User'),
+        (1, 'Company'),
+        (2, 'Self employed'),
     )
 
     email           = models.EmailField(max_length=255, unique=True)
@@ -84,7 +86,7 @@ class User(AbstractBaseUser):
     # email_active    = models.BooleanField(default=True)  # can login
     phone_active    = models.BooleanField(default=False) # can login
     # is_traider      = models.BooleanField(default=False)
-    is_traider = models.IntegerField(default=0, blank=True, null=True, choices=TRAIDER_STATUS)
+    is_traider      = models.IntegerField(default=0, blank=True, null=True, choices=TRAIDER_STATUS)
 
 
 
