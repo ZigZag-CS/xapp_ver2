@@ -184,19 +184,19 @@ PHONENUMBER_DB_FORMAT = 'INTERNATIONAL'
 # need  django-sendgrid-v5
 
 EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-DEFAULT_FROM_EMAIL = 'zigzag.creativ@gmail.com' #sendgrig sender email
+DEFAULT_FROM_EMAIL = 'zigzag.cril.com' #sendgrig sender email
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 SENDGRID_ECHO_TO_STDOUT=True
-SENDGRID_API_KEY = 'SG.rkVHzS1cTDuJHFWmIkrVOA.1Ah_V__uc5h8JA8KlL18rrrkFBj9xC3jSHPmJuaAyrg'
+SENDGRID_API_KEY = 'SG.rkVHzS1cTDuJBj9xC3jSHPmJuaAyrg'
 BASE_URL = 'http://127.0.0.1:8000'
 
 # ############### END Twilio SendGrid ###############
 
 # ######## MAILCHIMP settings ################
 
-MAILCHIMP_API_KEY           = "c851f255a42b8863050cfa04f3b5b269-us10"
+MAILCHIMP_API_KEY           = "c851f255a4fa04f3b5b269-us10"
 MAILCHIMP_DATA_CENTER       = "us10"
-MAILCHIMP_EMAIL_LIST_ID     = "075184f187"
+MAILCHIMP_EMAIL_LIST_ID     = "075187"
 
 # ######## END MAILCHIMP settings ################
 
