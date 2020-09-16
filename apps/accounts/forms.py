@@ -63,7 +63,7 @@ class UserDetailChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['full_name', 'is_traider']
+        fields = ['full_name', 'user_status']
 
 
 
@@ -229,7 +229,7 @@ class StatusChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('is_traider',)
+        fields = ('user_status',)
         # widgets = {
-        #     'is_traider': forms.BooleanField
+        #     'user_status': forms.BooleanField
         # }

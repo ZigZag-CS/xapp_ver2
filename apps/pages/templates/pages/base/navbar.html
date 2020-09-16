@@ -18,7 +18,7 @@
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Account</a>
 
-                                {% if user.is_traider %}
+                                {% if user.user_status %}
 
                                 <div class="dropdown-menu" role="menu">
                                     <a class="dropdown-item" role="presentation" href="{% url 'traider:dashboard-home' %}">Dashboard</a>

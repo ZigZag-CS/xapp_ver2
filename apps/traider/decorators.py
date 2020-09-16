@@ -8,7 +8,7 @@ def supplyer_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, lo
     redirects to the log-in page if necessary.
     '''
     actual_decorator = user_passes_test(
-        lambda u: u.is_active and ( u.is_traider == 1 or u.is_traider == 2 ),
+        lambda u: u.is_active and ( u.user_status == 1 or u.user_status == 2 ),
         login_url=login_url,
         redirect_field_name=redirect_field_name
     )

@@ -24,7 +24,7 @@ DEFAULT_ACTIVATION_DAYS = getattr(settings, 'DEFAULT_ACTIVATION_DAYS', 7)
 class UserManager(BaseUserManager):
 
     # aceasta metoda e strict legata de crearea utilizatorului si de REQUIRED_FIELDS din modelul utilizatorului
-    def create_user(self, email, full_name=None, password=None, is_active=True, is_staff=False, is_admin=False, is_traider=0):
+    def create_user(self, email, full_name=None, password=None, is_active=True, is_staff=False, is_admin=False, user_status=0):
         if not email:
             raise ValueError("Users must have an email address")
         if not password:
@@ -38,7 +38,7 @@ class UserManager(BaseUserManager):
         user_obj.staff = is_staff
         user_obj.admin = is_admin
         user_obj.active = is_active
-        user_obj.is_traider = is_traider
+        user_obj.user_status = user_status
         user_obj.save(using=self._db)
         return user_obj
 
@@ -63,10 +63,14 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    STATUS_USER = 0
+    STATUS_COMPANY = 1
+    STATUS_SELF_EMPLOYED = 2
+
     TRAIDER_STATUS = (
-        (0, 'User'),
-        (1, 'Company'),
-        (2, 'Self employed'),
+        (STATUS_USER, 'User'),
+        (STATUS_COMPANY, 'Company'),
+        (STATUS_SELF_EMPLOYED, 'Self employed'),
     )
 
     email           = models.EmailField(max_length=255, unique=True)
@@ -85,8 +89,8 @@ class User(AbstractBaseUser):
     is_active       = models.BooleanField(default=True)  # can login
     # email_active    = models.BooleanField(default=True)  # can login
     phone_active    = models.BooleanField(default=False) # can login
-    # is_traider      = models.BooleanField(default=False)
-    is_traider      = models.IntegerField(default=0, blank=True, null=True, choices=TRAIDER_STATUS)
+    # user_status      = models.BooleanField(default=False)
+    user_status      = models.IntegerField(default=0, blank=True, null=True, choices=TRAIDER_STATUS)
 
 
 
