@@ -233,3 +233,10 @@ class StatusChangeForm(forms.ModelForm):
         # widgets = {
         #     'user_status': forms.BooleanField
         # }
+
+class StatusChangeForm1(forms.Form):
+    fild1 = forms.BooleanField(label="Customer")
+    fild2 = forms.BooleanField(label="Traider")
+
+    def clean(self):
+        print(f"In functia clean(), data = {self.data}")

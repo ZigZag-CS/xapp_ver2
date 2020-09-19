@@ -228,16 +228,56 @@ class MyPasswordChangeView(PasswordChangeView):
     success_url = reverse_lazy('password_change_done')
 
 class MyPasswordChangeView1(PasswordChangeView):
-    statuschange_form_class = StatusChangeForm
+    # statuschange_form_class = StatusChangeForm1(self.request.GET or None)
     template_name = 'accounts/registration/password_change1.html'
     success_url = reverse_lazy('password_change_done')
 
-    def get(self, request):
-        # print(f' ====== forma pu change pass {self.form_class} ======')
-        pass_form = self.form_class
-        status_form = self.statuschange_form_class
-        return render(request, self.template_name, {'pass_form': pass_form, 'status_form':status_form})
+    def dispatch(self, *args, **kwargs):
+        print(f"===================")
+        print("In functia dispatch()")
+    #     print(f"request = {request}")
+    #     print(f"request.user.user_status = {request.user.user_status}")
+        print(f"*args = {args}")
+        print(f"**kwargs {kwargs}")
+        print(f"===================")
+        return super().dispatch(*args, **kwargs)
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        print(f"===================")
+        print("In functia get_form_kwargs()")
+        print(f"**kwargs {kwargs}")
+        print(f"===================")
+        return kwargs
+
+    # def get(self, request, *args, **kwargs):
+    #     print(f' functia get din MyPasswordChangeView1 ====== forma pu change pass {self.form_class} ======')
+    #     # pass_form = self.form_class
+    #     status_form = StatusChangeForm1(self.request.GET or None)
+    #     context = self.get_context_data(**kwargs)
+    #     context['status_form'] = status_form
+    #     print(f'context = {context}')
+    #     return render(request, self.template_name, {'status_form':status_form})
+    #
+    # def post(self, request, *args, **kwargs):
+    #     print(f"===================")
+    #     print("In functia post()")
+    #     print(f"request = {request}")
+    #     print(f"request.user.user_status = {request.user.user_status}")
+    #     print(f"*args = {args}")
+    #     print(f"**kwargs {kwargs}")
+    #     print(f"===================")
+    #     if 'status' in request.POST:
+    #         print("======= STATUS =======")
+    #
+    #     if request.user.user_status == 0:
+    #         return redirect('/dashboardc/home/')
+    #     else:
+    #         return redirect('/')
+    #
+    #     # return redirect('/dashboardc/home/')
+    #     # return reverse("customer:customer-update")
 
 
 class MyPasswordChangeDoneView(PasswordChangeDoneView):
