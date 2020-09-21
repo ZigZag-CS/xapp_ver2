@@ -246,8 +246,12 @@ class MyPasswordChangeForm(PasswordChangeForm):
     pass
 
 class MyStatusChangeForm(forms.Form):
-    fild1 = forms.BooleanField(label="Customer")
-    fild2 = forms.BooleanField(label="Traider")
+    # fild1 = forms.BooleanField(label="Customer")
+    # fild2 = forms.BooleanField(label="Traider")
+
+    class Meta:
+        model = User
+        fields = ('user_status',)
 
     def clean(self):
         print(f"In functia clean(), data = {self.data}")

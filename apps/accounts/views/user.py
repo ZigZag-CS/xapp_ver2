@@ -282,40 +282,75 @@ class MyPasswordChangeView1(PasswordChangeView):
 
 
 
-class MySettingsChangeView(PasswordContextMixin, TemplateView):
-    pass_form_class = MyPasswordChangeForm
-    status_form_class = MyStatusChangeForm
+class MySettingsChangeView(LoginRequiredMixin, TemplateView):
+    # login_required = True
+    # pass_form_class = MyPasswordChangeForm
+    # status_form_class = MyStatusChangeForm
     template_name = 'accounts/registration/settings_pass_status_change.html'
     # model = User
 
-    # def get_context_data(self, **kwargs):
-    #     extra_context = None
-    #     context = super(MySettingsChangeView, self).get_context_data(**kwargs)
-    #     context.update({
-    #         'pass_form': self.MyPasswordChangeForm,
-    #         'status_form': self.MyStatusChangeForm,
-    #         **(self.extra_context or {})
-    #     })
-    #     return context
+
 
     def get(self, request, *args, **kwargs):
         print(f' functia get din MySettingsChangeView ====== forma pu change pass  ======')
-        print(f' forma pu change pass {self.pass_form_class} ======')
-        print(f' forma pu change status {self.status_form_class} ======')
-        pass_form = self.pass_form_class
-        status_form = self.status_form_class
-        forms = {
-            "pass_form": pass_form,
-            'status_form': status_form
-        }
-        context = self.get_context_data(pass_form=pass_form, status_form=status_form)
-        # context['pass_form'] = pass_form
-        # context['status_form'] = status_form
-        print(f'context = {context}')
-        return self.render_to_response(context)
+    #     print(f' forma pu change pass {self.pass_form_class} ======')
+    #     print(f' forma pu change status {self.status_form_class} ======')
+    #     pass_form = self.pass_form_class
+    #     status_form = self.status_form_class
+    #     forms = {
+    #         "pass_form": pass_form,
+    #         'status_form': status_form
+    #     }
+    #     context = self.get_context_data(pass_form=pass_form, status_form=status_form)
+    #     # context['pass_form'] = pass_form
+    #     # context['status_form'] = status_form
+    #     print(f'context = {context}')
+    #     return self.render_to_response(context)
+        context = self.get_context_data(**kwargs)
+        print(f' functia get din MySettingsChangeView ====== {context}  ======')
+        return render(request, self.template_name, context)
 
-    # def post(self, request):
-    #     post_data = request.POST or None
+    def get_context_data(self, **kwargs):
+        extra_context = None
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'pass_form': MyPasswordChangeForm,
+            'status_form': MyStatusChangeForm,
+            **(self.extra_context or {})
+        })
+        print(f' functia get_context_data din MySettingsChangeView ====== {context}  ======')
+        return context
+
+    # @method_decorator(login_required)
+    def post(self, request):
+        post_data = request.POST or None
+        if 'pass' in self.request.POST:
+            print(" srabotal pass")
+            cont = self.request.POST
+            # cont = cont['user_status']
+            print(f' ==== in functia post === cont = {cont}')
+        elif 'status' in self.request.POST:
+            print(" srabotal status")
+            cont = self.request.POST.get('user_status', False)
+            new_status = int(cont['user_status'])
+            user_object = request.user.user_status
+            user_object = new_status
+            print(f' ==== in functia post === user_object = {user_object}')
+
+            # if cont['user_status']:
+            #     new_status = cont['user_status']
+            # else:
+            #     raise ValidationError(
+            #         'Invalid value: %(value)s',
+            #         code='invalid',
+            #         params={'value': '42'},
+            #     )
+
+            print(f' ==== in functia post === cont = {cont}')
+            # print(f' ==== in functia post === new_status = {new_status}')
+
+        # print(f' ==== in functia post === request = {request}')
+
     #     pass_form = self.pass_form_class(post_data, prefix='pass')
     #     status_form = self.status_form_class(post_data, prefix='status')
     #
@@ -328,7 +363,8 @@ class MySettingsChangeView(PasswordContextMixin, TemplateView):
     #         self.form_save(status_form)
     #
     #     return self.render_to_response(context)
-    #
+        return redirect('/dashboardc/home/')
+
     # def form_save(self, form):
     #     obj = form.save()
     #     messages.success(self.request, "{} saved successfully".format(obj))
