@@ -1,0 +1,143 @@
+{#{% extends "accounts/auth_base.html" %}#}
+{% extends "customer/dash_base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+    <div class="container-fluid">
+        <h3 class="text-dark mb-4">Settings - {{ user.email }} - {{ user.user_status }}</h3>
+    </div>
+
+    <div class="card shadow-lg o-hidden border-0 my-5">
+        <div class="card-body p-0">
+            <div class="row">
+
+                <div class="col-lg-6 d-none d-lg-flex">
+
+    {#                <div class="flex-grow-1 bg-register-image" style="background-image: url({% static 'accounts/images/dogs/image2.jpeg' %});"></div>#}
+
+                                    <div class="p-5">
+                        <div class="text-center">
+                            <h4 class="text-dark mb-4">Password change!</h4>
+                        </div>
+
+                        <form method="post" class="user">
+
+                            {% csrf_token %}
+                            {{ form.non_field_errors }}
+
+                            <div class="form-group">
+                                <input class="form-control form-control-user" type="password" name="old_password" id="id_old_password" required aria-describedby="emailHelp" placeholder="Old password" >
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="password" name="new_password1" id="id_new_password1" required class="form-control form-control-user" placeholder="New password" >
+                                </div>
+
+                                <span class="helptext">
+                                    <ul>
+                                        <li>YourYour password can’t be too similar to your other personal information.</li>
+                                        <li>Your password must contain at least 8 characters.</li>
+                                        <li>Your password can’t be a commonly used password.</li>
+                                        <li>Your password can’t be entirely numeric.</li>
+                                    </ul>
+                                </span>
+
+
+
+                                <div class="col-sm-6">
+                                    <input type="password" name="new_password2" id="id_new_password2" required class="form-control form-control-user" placeholder="Repeat new Password" >
+                                </div>
+                            </div>
+
+                            <button type="submit" name="pass" class="btn btn-primary btn-block text-white btn-user">Save</button>
+                            <hr>
+
+                            {{ pass_form.as_p }}
+
+                        </form>
+
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-6">
+
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h4 class="text-dark mb-4">Do you have your own business?</h4>
+                            <h4 class="text-dark mb-4">
+                                Create an account for your company by click
+                                <input type="checkbox" id="button11"><label for="button11" id="btn11">here</label>
+
+                                <form method="post" action="" id="status11">
+
+                                    {% csrf_token %}
+                                    {{ form.non_field_errors }}
+
+                                    <div class="row">
+
+                                        <div class="col-sm text-center">
+                                            <img width="200" src="{% static 'customer/img/company.png' %}" alt="female" />
+                                            <div class="form-check mt-3 mb-5">
+                                                <input
+                                                       type="radio"
+                                                       name="user_status"
+                                                       value="1"
+                                                       id="id_company"
+                                                >
+                                                <label class="form-check-label" for="id_company">
+                                                    Company
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm text-center">
+                                            <img width="200" src="{% static 'customer/img/human.png' %}" alt="human" />
+                                            <div class="form-check mt-3 mb-5">
+                                                <input
+                                                       type="radio"
+                                                       name="user_status"
+                                                       value="2"
+                                                       id="id_se"
+                                                >
+                                                <label class="form-check-label" for="id_se">
+                                                    Self employed
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <button type="submit" name="status" class="btn btn-primary btn-block text-white btn-user user">Change</button>
+                                    <hr>
+
+
+                                    {{ status_form.as_p }}
+
+
+                                </form>
+
+                            </h4>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock content %}

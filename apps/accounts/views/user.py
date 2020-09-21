@@ -280,6 +280,68 @@ class MyPasswordChangeView1(PasswordChangeView):
     #     # return reverse("customer:customer-update")
 
 
+
+
+class MySettingsChangeView(PasswordContextMixin, TemplateView):
+    pass_form_class = MyPasswordChangeForm
+    status_form_class = MyStatusChangeForm
+    template_name = 'accounts/registration/settings_pass_status_change.html'
+    # model = User
+
+    # def get_context_data(self, **kwargs):
+    #     extra_context = None
+    #     context = super(MySettingsChangeView, self).get_context_data(**kwargs)
+    #     context.update({
+    #         'pass_form': self.MyPasswordChangeForm,
+    #         'status_form': self.MyStatusChangeForm,
+    #         **(self.extra_context or {})
+    #     })
+    #     return context
+
+    def get(self, request, *args, **kwargs):
+        print(f' functia get din MySettingsChangeView ====== forma pu change pass  ======')
+        print(f' forma pu change pass {self.pass_form_class} ======')
+        print(f' forma pu change status {self.status_form_class} ======')
+        pass_form = self.pass_form_class
+        status_form = self.status_form_class
+        forms = {
+            "pass_form": pass_form,
+            'status_form': status_form
+        }
+        context = self.get_context_data(pass_form=pass_form, status_form=status_form)
+        # context['pass_form'] = pass_form
+        # context['status_form'] = status_form
+        print(f'context = {context}')
+        return self.render_to_response(context)
+
+    # def post(self, request):
+    #     post_data = request.POST or None
+    #     pass_form = self.pass_form_class(post_data, prefix='pass')
+    #     status_form = self.status_form_class(post_data, prefix='status')
+    #
+    #     context = self.get_context_data(pass_form=pass_form,
+    #                                     status_form=status_form)
+    #
+    #     if pass_form.is_valid():
+    #         self.form_save(pass_form)
+    #     if status_form.is_valid():
+    #         self.form_save(status_form)
+    #
+    #     return self.render_to_response(context)
+    #
+    # def form_save(self, form):
+    #     obj = form.save()
+    #     messages.success(self.request, "{} saved successfully".format(obj))
+    #     return obj
+    #
+    # def get(self, request, *args, **kwargs):
+    #     return self.post(request, *args, **kwargs)
+
+
+
+
+
+
 class MyPasswordChangeDoneView(PasswordChangeDoneView):
     template_name = 'accounts/registration/password_change_done.html'
     title = _('Password change successful')

@@ -2,7 +2,7 @@
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth import get_user_model, login, authenticate
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth.forms import ReadOnlyPasswordHashField, PasswordChangeForm
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext, gettext_lazy as _
 
@@ -240,3 +240,16 @@ class StatusChangeForm1(forms.Form):
 
     def clean(self):
         print(f"In functia clean(), data = {self.data}")
+
+
+class MyPasswordChangeForm(PasswordChangeForm):
+    pass
+
+class MyStatusChangeForm(forms.Form):
+    fild1 = forms.BooleanField(label="Customer")
+    fild2 = forms.BooleanField(label="Traider")
+
+    def clean(self):
+        print(f"In functia clean(), data = {self.data}")
+
+
