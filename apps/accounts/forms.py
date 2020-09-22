@@ -245,6 +245,23 @@ class StatusChangeForm1(forms.Form):
 class MyPasswordChangeForm(PasswordChangeForm):
     ''' forma de modificarea parolei utilizatorului '''
 
+    def is_valid(self):
+        print(f"In function is_valid() from MyPasswordChangeForm")
+        return self.errors
+
+    # def clean_old_password(self):
+    #     """
+    #     Validate that the old_password field is correct.
+    #     """
+    #     print(f" >>>> in clean_old_password din MyPasswordChangeForm <<<<")
+    #     old_password = self.cleaned_data["old_password"]
+    #     if not self.user.check_password(old_password):
+    #         raise forms.ValidationError(
+    #             self.error_messages['password_incorrect'],
+    #             code='password_incorrect',
+    #         )
+    #     return old_password
+
 class MyStatusChangeForm(forms.Form):
     ''' forma de schimbare a statutului utilizatorului '''
 

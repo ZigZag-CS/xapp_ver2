@@ -289,6 +289,10 @@ class MySettingsChangeView(LoginRequiredMixin, TemplateView):
     # status_form_class = MyStatusChangeForm
     template_name = 'accounts/registration/settings_pass_status_change.html'
     # model = User
+    error_messages = {
+        **SetPasswordForm.error_messages,
+        'password_incorrect': _("Your old password was entered incorrectly. Please enter it again."),
+    }
 
 
 
@@ -325,11 +329,25 @@ class MySettingsChangeView(LoginRequiredMixin, TemplateView):
     # @method_decorator(login_required)
     def post(self, request):
         post_data = request.POST or None
+        print(f' functia post din MySettingsChangeView ====== {post_data}  ======')
         if 'pass' in self.request.POST:
             print(" srabotal pass")
-            cont = self.request.POST
-            # cont = cont['user_status']
-            print(f' ==== in functia post === cont = {cont}')
+            if self.request.POST['old_password'] and self.request.POST['new_password1'] and self.request.POST['new_password2']:
+                if self.request.POST['new_password1'] == self.request.POST['new_password2']:
+                    form_old_password = self.request.POST['old_password']
+                    if not self.request.user.check_password(form_old_password):
+                        print("parola veche incorecta")
+                    else:
+                        print(">>>>>>>>>>>>> PAROLA CORECTA <<<<<<<<<<<<")
+                        self.request.user.set_password(self.request.POST['new_password1'])
+                        self.request.user.save()
+                else:
+                    print("parolele nu coincid")
+                    cont = "Password Error"
+            else:
+                cont = "Form Error"
+            # cont = cont['old_password']
+            # print(f' ==== in functia post === cont = {cont}')
         elif 'status' in self.request.POST:
             print(" srabotal status")
             if not request.user.is_active or not request.user.phone_active:
@@ -392,6 +410,65 @@ class MySettingsChangeView(LoginRequiredMixin, TemplateView):
     # def get(self, request, *args, **kwargs):
     #     return self.post(request, *args, **kwargs)
 
+class MySettingsChangeView1(LoginRequiredMixin, TemplateView):
+    template_name = 'accounts/registration/settings_pass_status_change.html'
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        return render(request, self.template_name, context)
+
+    def get_context_data(self, **kwargs):
+        extra_context = None
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'pass_form': MyPasswordChangeForm,
+            'status_form': MyStatusChangeForm,
+            **(self.extra_context or {})
+        })
+        return context
+
+    def post(self, request):
+        # form = self.get_form()
+        post_data = request.POST or None
+        # form_pas = post_data.get('pass_form')
+        # print(f"********** put == form = {form_pas}")
+        if 'pass' in self.request.POST:
+            print(" srabotal pass")
+            form_pas = self.request.POST.get('pass_form')
+            print(f"********** put == form_pass = {form_pas} ****************")
+            if self.request.POST['old_password'] and self.request.POST['new_password1'] and self.request.POST['new_password2']:
+                if self.request.POST['new_password1'] == self.request.POST['new_password2']:
+                    form_old_password = self.request.POST['old_password']
+                    if not self.request.user.check_password(form_old_password):
+                        print("staryi paroli nepravel'nyj")
+                    else:
+                        print(">>>>>>>>>>>>> Pass iz correct <<<<<<<<<<<<")
+                        self.request.user.set_password(self.request.POST['new_password1'])
+                        self.request.user.save()
+                else:
+                    print("paroli ne sovpadaet")
+                    cont = "Password Error"
+            else:
+                cont = "Form Error"
+        elif 'status' in self.request.POST:
+            print(" srabotal status")
+            if not request.user.is_active or not request.user.phone_active:
+                return redirect('/')
+            else:
+                cont = self.request.POST
+                try:
+                    new_status = cont['user_status']
+                    print(f"# ======= {new_status} ========= #")
+                except MultiValueDictKeyError:
+                    new_status = request.user.user_status
+                    print(f"# ======= {new_status} ========= #")
+                curent_user = request.user.pk
+                print(f"# ===curent_user==== {curent_user} ========= #")
+                object = get_object_or_404(User, pk=curent_user)
+                print(f"# ===object==== {object} ========= #")
+                object.user_status = new_status
+                object.save()
+        return redirect('/dashboardc/home/')
 
 
 
