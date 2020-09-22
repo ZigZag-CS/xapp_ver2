@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from django.contrib.auth.mixins import AccessMixin
+from django.shortcuts import redirect
 from django.utils.http import is_safe_url
 
 
@@ -25,3 +27,11 @@ class NextUrlMixin(object):
         if is_safe_url(redirect_path, request.get_host()):
                 return redirect_path
         return self.default_next
+
+class ActivationRequiredMixin(AccessMixin):
+    """Verify that the current user is authenticated."""
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_active or not request.user.phone_active:
+            # return self.handle_no_permission()
+            return redirect('/')
+        return super().dispatch(request, *args, **kwargs)

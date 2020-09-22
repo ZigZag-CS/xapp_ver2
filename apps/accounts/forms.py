@@ -243,17 +243,27 @@ class StatusChangeForm1(forms.Form):
 
 
 class MyPasswordChangeForm(PasswordChangeForm):
-    pass
+    ''' forma de modificarea parolei utilizatorului '''
 
 class MyStatusChangeForm(forms.Form):
-    # fild1 = forms.BooleanField(label="Customer")
-    # fild2 = forms.BooleanField(label="Traider")
+    ''' forma de schimbare a statutului utilizatorului '''
 
-    class Meta:
-        model = User
-        fields = ('user_status',)
+    # def __init__(self, request, *args, **kwargs):
+    #     self.request = request
+    #     super(MyStatusChangeForm, self).__init__(*args, **kwargs)
+    #
+    # def clean(self):
+    #     cleaned_data = super().clean()
+    #     print(f"In functia clean(), data = {self.data}")
+    #     request = self.request
+    #     # data = self.cleaned_data
+    #     return cleaned_data
+    #
+    # def is_valid(self):
+    #     print(f"In functia is_valid(), data = ")
+    #     return self.is_bound and not self.errors
 
-    def clean(self):
-        print(f"In functia clean(), data = {self.data}")
-
-
+    # def clean_recipients(self):
+    #     data = super(MyStatusChangeForm, self).clean()
+    #     print(f"In functia clean_recipients(), data = {data}")
+    #     return data

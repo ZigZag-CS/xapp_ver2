@@ -4,6 +4,7 @@
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.http import Http404, request
@@ -16,13 +17,13 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.views import *
 
 from django.views.generic import CreateView, FormView, DetailView, View, UpdateView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 # from django.utils.http import is_safe_url
 
 from django.views.generic.edit import FormMixin
 
-from ..mixins import NextUrlMixin, RequestFormAttachMixin
+from ..mixins import NextUrlMixin, RequestFormAttachMixin, ActivationRequiredMixin
 from ..forms import *
 from django.contrib.auth.forms import PasswordChangeForm
 from ..models import *
@@ -331,11 +332,29 @@ class MySettingsChangeView(LoginRequiredMixin, TemplateView):
             print(f' ==== in functia post === cont = {cont}')
         elif 'status' in self.request.POST:
             print(" srabotal status")
-            cont = self.request.POST.get('user_status', False)
-            new_status = int(cont['user_status'])
-            user_object = request.user.user_status
-            user_object = new_status
-            print(f' ==== in functia post === user_object = {user_object}')
+            if not request.user.is_active or not request.user.phone_active:
+                return redirect('/')
+            else:
+                cont = self.request.POST
+                # print(f"# ======= {cont['user_status']} ========= #")
+                try:
+                    new_status = cont['user_status']
+                    print(f"# ======= {new_status} ========= #")
+                except MultiValueDictKeyError:
+                    new_status = request.user.user_status
+                    print(f"# ======= {new_status} ========= #")
+                curent_user = request.user.pk
+                print(f"# ===curent_user==== {curent_user} ========= #")
+                object = get_object_or_404(User, pk=curent_user)
+                print(f"# ===object==== {object} ========= #")
+                object.user_status = new_status
+                object.save()
+            # cont = int(self.request.POST.get('user_status', False))
+            # print(f'======= {type(cont)} ======= {cont} =======')
+            # new_status = int(cont['user_status'])
+            # user_object = request.user.user_status
+            # user_object = new_status
+            # print(f' ==== in functia post === user_object = {user_object}')
 
             # if cont['user_status']:
             #     new_status = cont['user_status']
@@ -346,7 +365,7 @@ class MySettingsChangeView(LoginRequiredMixin, TemplateView):
             #         params={'value': '42'},
             #     )
 
-            print(f' ==== in functia post === cont = {cont}')
+                print(f' ==== in functia post === cont = {cont}')
             # print(f' ==== in functia post === new_status = {new_status}')
 
         # print(f' ==== in functia post === request = {request}')
