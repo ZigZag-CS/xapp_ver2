@@ -245,9 +245,9 @@ class StatusChangeForm1(forms.Form):
 class MyPasswordChangeForm(PasswordChangeForm):
     ''' forma de modificarea parolei utilizatorului '''
 
-    def is_valid(self):
-        print(f"In function is_valid() from MyPasswordChangeForm")
-        return self.errors
+    # def is_valid(self):
+    #     print(f"In function is_valid() from MyPasswordChangeForm")
+    #     return self.errors
 
     # def clean_old_password(self):
     #     """
@@ -284,3 +284,36 @@ class MyStatusChangeForm(forms.Form):
     #     data = super(MyStatusChangeForm, self).clean()
     #     print(f"In functia clean_recipients(), data = {data}")
     #     return data
+
+class MyPasswordChangeForm1(forms.Form):
+    ''' forma de modificarea parolei utilizatorului '''
+
+    old_password = forms.CharField(strip=False, widget=forms.PasswordInput())
+    new_password1 = forms.CharField(strip=False, widget=forms.PasswordInput())
+    new_password2 = forms.CharField(strip=False, widget=forms.PasswordInput())
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        print(f"Metoda __init__ a clasei formei parolei, self.user = {self.user}")
+        super().__init__(*args, **kwargs)
+
+    def clean(self):
+        # request = self.request
+        cleaned_data = super().clean()
+        print(f"In MyPasswordChangeForm1 functia clean(), cleaned_data = {cleaned_data}")
+        if cleaned_data['new_password1'] != cleaned_data['new_password2']:
+            self.add_error('new_password2', 'New password confirmation is not same to new password')
+        print(f"in clean() din forma self.user = {self.user}")
+        if self.user and not self.user.check_password(cleaned_data['old_password']):
+            self.add_error('old_password', 'Current password is not valid')
+        return cleaned_data
+
+    def is_valid(self):
+        print(f"In functia is_valid()")
+        return self.is_bound and not self.errors
+
+
+class MyStatusChangeForm1(forms.Form):
+    ''' forma de schimbare a statutului utilizatorului '''
+
+    user_status = forms.CharField()

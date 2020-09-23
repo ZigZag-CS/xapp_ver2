@@ -415,60 +415,73 @@ class MySettingsChangeView1(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
+        print(f' functia get din MySettingsChangeView1 ====== {context}  ======')
         return render(request, self.template_name, context)
 
-    def get_context_data(self, **kwargs):
-        extra_context = None
-        context = super().get_context_data(**kwargs)
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
         context.update({
-            'pass_form': MyPasswordChangeForm,
-            'status_form': MyStatusChangeForm,
-            **(self.extra_context or {})
+            'pass_form': MyPasswordChangeForm1(self.request.POST or None),
+            'status_form': MyStatusChangeForm1(self.request.POST or None)
         })
         return context
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
+        password_form = MyPasswordChangeForm1(user=request.user, data=request.POST or None)
+        print(f"++++++++++++++ put == password_form.data = {password_form.data['new_password1']} ++++++++++++++")
+        # print(f"********** put == password_form = {password_form} ****************")
+        # print(f"********** put == password_form.cleaned_data.get = {password_form.cleaned_data.get('new_password1')} ****************")
+        print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        statuss_form = MyStatusChangeForm1(request.POST or None)
+        # print(f"********** put == statuss_form = {statuss_form} ****************")
+        if password_form.is_valid():
+            print("forma validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+            self.request.user.set_password(password_form.data['new_password1'])
+            self.request.user.save()
+            return redirect('/')
+        else:
+            print("forma NE validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         # form = self.get_form()
         post_data = request.POST or None
         # form_pas = post_data.get('pass_form')
         # print(f"********** put == form = {form_pas}")
-        if 'pass' in self.request.POST:
-            print(" srabotal pass")
-            form_pas = self.request.POST.get('pass_form')
-            print(f"********** put == form_pass = {form_pas} ****************")
-            if self.request.POST['old_password'] and self.request.POST['new_password1'] and self.request.POST['new_password2']:
-                if self.request.POST['new_password1'] == self.request.POST['new_password2']:
-                    form_old_password = self.request.POST['old_password']
-                    if not self.request.user.check_password(form_old_password):
-                        print("staryi paroli nepravel'nyj")
-                    else:
-                        print(">>>>>>>>>>>>> Pass iz correct <<<<<<<<<<<<")
-                        self.request.user.set_password(self.request.POST['new_password1'])
-                        self.request.user.save()
-                else:
-                    print("paroli ne sovpadaet")
-                    cont = "Password Error"
-            else:
-                cont = "Form Error"
-        elif 'status' in self.request.POST:
-            print(" srabotal status")
-            if not request.user.is_active or not request.user.phone_active:
-                return redirect('/')
-            else:
-                cont = self.request.POST
-                try:
-                    new_status = cont['user_status']
-                    print(f"# ======= {new_status} ========= #")
-                except MultiValueDictKeyError:
-                    new_status = request.user.user_status
-                    print(f"# ======= {new_status} ========= #")
-                curent_user = request.user.pk
-                print(f"# ===curent_user==== {curent_user} ========= #")
-                object = get_object_or_404(User, pk=curent_user)
-                print(f"# ===object==== {object} ========= #")
-                object.user_status = new_status
-                object.save()
-        return redirect('/dashboardc/home/')
+        # if 'pass' in self.request.POST:
+        #     print(" srabotal pass3")
+        #     form_pas = self.request.POST.get('pass_form')
+        #     print(f"********** put == form_pass = {form_pas} ****************")
+        #     if self.request.POST['old_password'] and self.request.POST['new_password1'] and self.request.POST['new_password2']:
+        #         if self.request.POST['new_password1'] == self.request.POST['new_password2']:
+        #             form_old_password = self.request.POST['old_password']
+        #             if not self.request.user.check_password(form_old_password):
+        #                 print("staryi paroli nepravel'nyj")
+        #             else:
+        #                 print(">>>>>>>>>>>>> Pass iz correct <<<<<<<<<<<<")
+        #                 self.request.user.set_password(self.request.POST['new_password1'])
+        #                 self.request.user.save()
+        #         else:
+        #             print("paroli ne sovpadaet")
+        #             cont = "Password Error"
+        #     else:
+        #         cont = "Form Error"
+        # elif 'status' in self.request.POST:
+        #     print(" srabotal status3")
+        #     if not request.user.is_active or not request.user.phone_active:
+        #         return redirect('/')
+        #     else:
+        #         cont = self.request.POST
+        #         try:
+        #             new_status = cont['user_status']
+        #             print(f"# ======= {new_status} ========= #")
+        #         except MultiValueDictKeyError:
+        #             new_status = request.user.user_status
+        #             print(f"# ======= {new_status} ========= #")
+        #         curent_user = request.user.pk
+        #         print(f"# ===curent_user==== {curent_user} ========= #")
+        #         object = get_object_or_404(User, pk=curent_user)
+        #         print(f"# ===object==== {object} ========= #")
+        #         object.user_status = new_status
+        #         object.save()
+        return redirect('/accounts/password/change3/')
 
 
 
