@@ -5,6 +5,8 @@ from django.utils.datastructures import MultiValueDictKeyError
 from apps.accounts.forms import MyPasswordChangeForm, MyStatusChangeForm
 
 
+
+
 class MySettingsChangeView(LoginRequiredMixin, TemplateView):
     template_name = 'accounts/registration/settings_pass_status_change.html'
 
