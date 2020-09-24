@@ -294,22 +294,23 @@ class MyPasswordChangeForm1(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
-        print(f"Metoda __init__ a clasei formei parolei, self.user = {self.user}")
+        print(f"MyPasswordChangeForm1 metoda __init__ a clasei formei parolei, self.user = {self.user}")
         super().__init__(*args, **kwargs)
 
     def clean(self):
-        # request = self.request
+        print(f"In MyPasswordChangeForm1 functia clean()")
         cleaned_data = super().clean()
-        print(f"In MyPasswordChangeForm1 functia clean(), cleaned_data = {cleaned_data}")
+        # print(f"In MyPasswordChangeForm1 functia clean(), cleaned_data = {cleaned_data}")
         if cleaned_data['new_password1'] != cleaned_data['new_password2']:
             self.add_error('new_password2', 'New password confirmation is not same to new password')
-        print(f"in clean() din forma self.user = {self.user}")
+        # print(f"in clean() din forma self.user = {self.user}")
         if self.user and not self.user.check_password(cleaned_data['old_password']):
             self.add_error('old_password', 'Current password is not valid')
+        print(f"**** add_error din clean() din MyPasswordChangeForm1 => {self.add_error}")
         return cleaned_data
 
     def is_valid(self):
-        print(f"In functia is_valid()")
+        print(f"In MyPasswordChangeForm1 functia is_valid()")
         return self.is_bound and not self.errors
 
 
@@ -317,3 +318,8 @@ class MyStatusChangeForm1(forms.Form):
     ''' forma de schimbare a statutului utilizatorului '''
 
     user_status = forms.CharField()
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        print(f"MyStatusChangeForm1 metoda __init__ a clasei formei statutului, self.user = {self.user}")
+        super().__init__(*args, **kwargs)

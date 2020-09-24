@@ -24,10 +24,33 @@
                             <h4 class="text-dark mb-4">Password change!</h4>
                         </div>
 
+                        {% if messages %}
+                            {% for message in messages %}
+                                        <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+                            {% endfor %}
+                        {% endif %}
+
                         <form method="post" class="user">
 
                             {% csrf_token %}
-                            {{ form.non_field_errors }}
+                            {{ pass_form.non_field_errors }}
+
+                            {% if pass_form.errors %}
+                            <!-- Error messaging -->
+                            <div id="errors">
+                                <div class="inner">
+                                    <p>There were some errors in the information you entered. Please correct the following:</p>
+                                    <ul>
+                                        {% for field in pass_form %}
+                                            {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- /Error messaging -->
+                            {% endif %}
+
+                            {{ pass_form.old_password.errors }}
 
                             <div class="form-group">
                                 <input class="form-control form-control-user" type="password" name="old_password" id="id_old_password" required aria-describedby="emailHelp" placeholder="Old password" >

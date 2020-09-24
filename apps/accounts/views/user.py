@@ -413,36 +413,50 @@ class MySettingsChangeView(LoginRequiredMixin, TemplateView):
 class MySettingsChangeView1(LoginRequiredMixin, TemplateView):
     template_name = 'accounts/registration/settings_pass_status_change.html'
 
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
-        print(f' functia get din MySettingsChangeView1 ====== {context}  ======')
-        return render(request, self.template_name, context)
-
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context.update({
-            'pass_form': MyPasswordChangeForm1(self.request.POST or None),
-            'status_form': MyStatusChangeForm1(self.request.POST or None)
+            'pass_form': None,
+            'status_form': None
         })
+        print(f' MySettingsChangeView1 functia get_context_data => {context}  ======')
         return context
 
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        context['pass_form'] = MyPasswordChangeForm1(user=self.request.user)
+        context['status_form'] = MyStatusChangeForm1(user=self.request.user)
+        print(f' MySettingsChangeView1 functia get => {context}  ======')
+        return render(request, self.template_name, context)
+
     def post(self, request, *args, **kwargs):
+        print(f' MySettingsChangeView1 functia post  ======  ======')
         password_form = MyPasswordChangeForm1(user=request.user, data=request.POST or None)
-        print(f"++++++++++++++ put == password_form.data = {password_form.data['new_password1']} ++++++++++++++")
+        # print(f"++++++++++++++ put == password_form.data = {password_form.data['new_password1']} ++++++++++++++")
         # print(f"********** put == password_form = {password_form} ****************")
         # print(f"********** put == password_form.cleaned_data.get = {password_form.cleaned_data.get('new_password1')} ****************")
-        print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-        statuss_form = MyStatusChangeForm1(request.POST or None)
+        # print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        status_form = MyStatusChangeForm1(user=request.user, data=request.POST or None)
         # print(f"********** put == statuss_form = {statuss_form} ****************")
+        # print(f"pana la validare, forma password_form.cleaned_data = {password_form.cleaned_data}")
         if password_form.is_valid():
             print("forma validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+            # print(f"forma password_form.cleaned_data = {password_form.cleaned_data}")
             self.request.user.set_password(password_form.data['new_password1'])
             self.request.user.save()
+            update_session_auth_hash(request, password_form.user)
             return redirect('/')
         else:
             print("forma NE validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+
+        context = self.get_context_data()
+        context['pass_form'] = password_form
+        context['status_form'] = status_form
+        return render(self.request, self.template_name, context)
+
+        # return redirect('/accounts/password/change3/')
         # form = self.get_form()
-        post_data = request.POST or None
+        # post_data = request.POST or None
         # form_pas = post_data.get('pass_form')
         # print(f"********** put == form = {form_pas}")
         # if 'pass' in self.request.POST:
@@ -481,7 +495,7 @@ class MySettingsChangeView1(LoginRequiredMixin, TemplateView):
         #         print(f"# ===object==== {object} ========= #")
         #         object.user_status = new_status
         #         object.save()
-        return redirect('/accounts/password/change3/')
+
 
 
 
