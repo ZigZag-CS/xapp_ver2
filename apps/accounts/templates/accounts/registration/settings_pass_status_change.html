@@ -34,25 +34,25 @@
                             {% csrf_token %}
                             {{ pass_form.non_field_errors }}
 
-<!--                            {% if pass_form.errors %}-->
-<!--                            &lt;!&ndash; Error messaging &ndash;&gt;-->
-<!--                            <div id="errors">-->
-<!--                                <div class="inner">-->
-<!--                                    <p>There were some errors in the information you entered. Please correct the following:</p>-->
-<!--                                    <ul>-->
-<!--                                        {% for field in pass_form %}-->
-<!--                                            {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}-->
-<!--                                        {% endfor %}-->
-<!--                                    </ul>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            &lt;!&ndash; /Error messaging &ndash;&gt;-->
-<!--                            {% endif %}-->
+                            {% if pass_form.errors %}
+                            <!-- Error messaging -->
+                            <div id="errors">
+                                <div class="inner">
+                                    <p>There were some errors in the information you entered. Please correct the following:</p>
+                                    <ul>
+                                        {% for field in pass_form %}
+                                            {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- /Error messaging -->
+                            {% endif %}
 
-                            {{ pass_form.old_password.errors }}
+<!--                            {{ pass_form.old_password.errors }}-->
 
                             <div class="form-group">
-                                <input class="form-control form-control-user" type="password" name="old_password" id="id_old_password" required aria-describedby="emailHelp" placeholder="Old password" >
+                                <input class="form-control form-control-user" type="password" name="old_password" id="id_old_password" aria-describedby="emailHelp" placeholder="Old password" >
                             </div>
 
                             <div class="form-group row">

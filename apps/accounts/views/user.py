@@ -431,16 +431,17 @@ class MySettingsChangeView1(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         print(f' MySettingsChangeView1 functia post  ======  ======')
-        password_form = MyPasswordChangeForm1(user=request.user, data=request.POST or None)
+        # password_form = MyPasswordChangeForm1(user=request.user, data=request.POST or None)
         # print(f"++++++++++++++ put == password_form.data = {password_form.data['new_password1']} ++++++++++++++")
         # print(f"********** put == password_form.cleaned_data = {password_form.data['status']} ****************")
         # print(f"********** put == password_form.cleaned_data.get = {password_form.cleaned_data.get('new_password1')} ****************")
         # print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-        status_form = MyStatusChangeForm1(user=request.user, data=request.POST or None)
+        # status_form = MyStatusChangeForm1(user=request.user, data=request.POST or None)
         # print(f"********** put == statuss_form.cleaned_data = {status_form.data} ****************")
         # print(f"pana la validare, forma password_form.cleaned_data = {password_form.cleaned_data}")
         if 'pass' in self.request.POST:
             print("Schimbam parola")
+            password_form = MyPasswordChangeForm1(user=request.user, data=request.POST or None)
             if password_form.is_valid():
                 print("forma validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
                 # print(f"forma password_form.cleaned_data = {password_form.cleaned_data}")
@@ -452,6 +453,7 @@ class MySettingsChangeView1(LoginRequiredMixin, TemplateView):
                 print("password_form NE validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         elif 'status' in self.request.POST:
             print("Schimbam statutul")
+            status_form = MyStatusChangeForm1(user=request.user, data=request.POST or None)
             if status_form.is_valid():
                 return redirect('/')
             else:
@@ -461,8 +463,8 @@ class MySettingsChangeView1(LoginRequiredMixin, TemplateView):
         #     print("forma NE validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 
         context = self.get_context_data()
-        context['pass_form'] = password_form
-        context['status_form'] = status_form
+        # context['pass_form'] = password_form
+        # context['status_form'] = status_form
         return render(self.request, self.template_name, context)
 
         # return redirect('/accounts/password/change3/')
