@@ -17,9 +17,8 @@
 
                 <div class="col-lg-6 d-none d-lg-flex">
 
-    {#                <div class="flex-grow-1 bg-register-image" style="background-image: url({% static 'accounts/images/dogs/image2.jpeg' %});"></div>#}
 
-                                    <div class="p-5">
+                                       <div class="p-5">
                         <div class="text-center">
                             <h4 class="text-dark mb-4">Password change!</h4>
                         </div>
@@ -35,20 +34,20 @@
                             {% csrf_token %}
                             {{ pass_form.non_field_errors }}
 
-                            {% if pass_form.errors %}
-                            <!-- Error messaging -->
-                            <div id="errors">
-                                <div class="inner">
-                                    <p>There were some errors in the information you entered. Please correct the following:</p>
-                                    <ul>
-                                        {% for field in pass_form %}
-                                            {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- /Error messaging -->
-                            {% endif %}
+<!--                            {% if pass_form.errors %}-->
+<!--                            &lt;!&ndash; Error messaging &ndash;&gt;-->
+<!--                            <div id="errors">-->
+<!--                                <div class="inner">-->
+<!--                                    <p>There were some errors in the information you entered. Please correct the following:</p>-->
+<!--                                    <ul>-->
+<!--                                        {% for field in pass_form %}-->
+<!--                                            {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}-->
+<!--                                        {% endfor %}-->
+<!--                                    </ul>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; /Error messaging &ndash;&gt;-->
+<!--                            {% endif %}-->
 
                             {{ pass_form.old_password.errors }}
 
@@ -59,7 +58,7 @@
                             <div class="form-group row">
 
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="password" name="new_password1" id="id_new_password1" required class="form-control form-control-user" placeholder="New password" >
+                                    <input type="password" name="new_password1" id="id_new_password1"  class="form-control form-control-user" placeholder="New password" >
                                 </div>
 
                                 <span class="helptext">
@@ -74,7 +73,7 @@
 
 
                                 <div class="col-sm-6">
-                                    <input type="password" name="new_password2" id="id_new_password2" required class="form-control form-control-user" placeholder="Repeat new Password" >
+                                    <input type="password" name="new_password2" id="id_new_password2"  class="form-control form-control-user" placeholder="Repeat new Password" >
                                 </div>
                             </div>
 
@@ -99,6 +98,12 @@
                             <h4 class="text-dark mb-4">
                                 Create an account for your company by click
                                 <input type="checkbox" id="button11"><label for="button11" id="btn11">here</label>
+
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+                                    {% endfor %}
+                                {% endif %}
 
                                 <form method="post" action="" id="status11">
 
