@@ -96,14 +96,32 @@
                         <div class="text-center">
                             <h4 class="text-dark mb-4">Do you have your own business?</h4>
                             <h4 class="text-dark mb-4">
+
+<!--                                {% if messages %}-->
+<!--                                    {% for message in messages %}-->
+<!--                                        <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>-->
+<!--                                    {% endfor %}-->
+<!--                                {% endif %}-->
+
+                                {% if pass_form.errors %}
+                            <!-- Error messaging -->
+                            <div id="errors">
+                                <div class="inner">
+                                    <p>There were some errors in the information you entered. Please correct the following:</p>
+                                    <ul>
+                                        {% for field in status_form %}
+                                            {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- /Error messaging -->
+                            {% endif %}
+
                                 Create an account for your company by click
                                 <input type="checkbox" id="button11"><label for="button11" id="btn11">here</label>
 
-                                {% if messages %}
-                                    {% for message in messages %}
-                                        <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
-                                    {% endfor %}
-                                {% endif %}
+
 
                                 <form method="post" action="" id="status11">
 

@@ -295,23 +295,23 @@ class MyPasswordChangeForm1(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
-        print(f"MyPasswordChangeForm1 metoda __init__ a clasei formei parolei, self.user = {self.user}")
+        # print(f"MyPasswordChangeForm1 metoda __init__ a clasei formei parolei, self.user = {self.user}")
         super().__init__(*args, **kwargs)
 
     def clean_old_password(self):
-        print(f"In MyPasswordChangeForm1 functia clean_old_password()")
+        # print(f"In MyPasswordChangeForm1 functia clean_old_password()")
         cleaned_data = super().clean()
-        print(f"In MyPasswordChangeForm1 functia clean_old_password(), cleaned_data = {cleaned_data}")
+        # print(f"In MyPasswordChangeForm1 functia clean_old_password(), cleaned_data = {cleaned_data}")
         if cleaned_data:
-            print(f"cleaned_data['old_password'] => {cleaned_data['old_password']}")
+            # print(f"cleaned_data['old_password'] => {cleaned_data['old_password']}")
             if self.user and not self.user.check_password(cleaned_data['old_password']):
                 self.add_error('old_password', 'Current password is not valid')
         return cleaned_data
 
     def clean(self):
-        print(f"In MyPasswordChangeForm1 functia clean()")
+        # print(f"In MyPasswordChangeForm1 functia clean()")
         cleaned_data = super().clean()
-        print(f"In MyPasswordChangeForm1 functia clean(), cleaned_data = {cleaned_data}")
+        # print(f"In MyPasswordChangeForm1 functia clean(), cleaned_data = {cleaned_data}")
         if cleaned_data:
             if ('new_password1' in cleaned_data) and ('new_password2' in cleaned_data):
                 if cleaned_data['new_password1'] != cleaned_data['new_password2']:
@@ -340,7 +340,7 @@ class MyStatusChangeForm1(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
-        print(f"MyStatusChangeForm1 metoda __init__ a clasei formei statutului, self.user = {self.user}")
+        # print(f"MyStatusChangeForm1 metoda __init__ a clasei formei statutului, self.user = {self.user}")
         super().__init__(*args, **kwargs)
 
     def clean(self):
@@ -348,10 +348,16 @@ class MyStatusChangeForm1(forms.Form):
         cleaned_data = super().clean()
         print(f" ----- cleaned_data => {cleaned_data}")
         if cleaned_data:
-        # if cleaned_data['user_status']:
-            print(f"cleaned_data => {cleaned_data['user_status']}")
+            if not ('user_status' in cleaned_data):
+                print("not 'user_status' in cleaned_data")
+                self.add_error('user_status', 'need check status')
         else:
             self.add_error('user_status', 'need check status')
+            raise ValidationError("Please enter data", code='invalid')
+
+            #     print(f"cleaned_data['user_status'] => {cleaned_data['user_status']}")
+            # else:
+            #     self.add_error('user_status', 'need check status')
         return cleaned_data
 
     def is_valid(self):

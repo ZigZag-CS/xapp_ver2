@@ -419,10 +419,11 @@ class MySettingsChangeView1(LoginRequiredMixin, TemplateView):
             'pass_form': None,
             'status_form': None
         })
-        # print(f' MySettingsChangeView1 functia get_context_data => {context}  ======')
+        print(f' MySettingsChangeView1 functia get_context_data => {context}  ======')
         return context
 
     def get(self, request, *args, **kwargs):
+        # print(f' MySettingsChangeView1 functia get  ====== > ======')
         context = self.get_context_data(**kwargs)
         context['pass_form'] = MyPasswordChangeForm1(user=self.request.user)
         context['status_form'] = MyStatusChangeForm1(user=self.request.user)
@@ -430,8 +431,57 @@ class MySettingsChangeView1(LoginRequiredMixin, TemplateView):
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
-        print(f' MySettingsChangeView1 functia post  ======  ======')
-        # password_form = MyPasswordChangeForm1(user=request.user, data=request.POST or None)
+        # print(f' ##### MySettingsChangeView1 functia POST  ======  ======')
+
+
+
+        # print(f' ##### MySettingsChangeView1 functia POST >> context = self.get_context_data(**kwargs) => {context["pass_form"]}  ======')
+        # print(f' ##### MySettingsChangeView1 functia POST >> context = self.get_context_data(**kwargs) => {context["status_form"]}  ======')
+        # print(f" Metoda PUT forma password_form == {password_form}")
+        # print(f" Metoda PUT forma status_form == {status_form}")
+        if 'pass' in self.request.POST:
+            password_form = MyPasswordChangeForm1(request.POST or None, user=request.user)
+            if password_form.is_valid():
+                print("Schimbam parola")
+                self.request.user.set_password(password_form.data['new_password1'])
+                self.request.user.save()
+                update_session_auth_hash(request, password_form.user)
+                return redirect('/')
+            else:
+                context = self.get_context_data(**kwargs)
+                context['pass_form'] = password_form
+                context['status_form'] = MyStatusChangeForm1(user=request.user)
+                return render(self.request, self.template_name, context)
+
+        if 'status' in self.request.POST:
+            status_form = MyStatusChangeForm1(request.POST or None, user=request.user)
+            if status_form and status_form.is_valid():
+                print("Schimbam statutul")
+                if not request.user.is_active or not request.user.phone_active:
+                    return redirect('/')
+                else:
+                    cont = self.request.POST
+                    try:
+                        new_status = cont['user_status']
+                        # print(f"# ======= {new_status} ========= #")
+                    except MultiValueDictKeyError:
+                        new_status = request.user.user_status
+                        # print(f"# ======= {new_status} ========= #")
+                    curent_user = request.user.pk
+                    # print(f"# ===curent_user==== {curent_user} ========= #")
+                    object = get_object_or_404(User, pk=curent_user)
+                    # print(f"# ===object==== {object} ========= #")
+                    object.user_status = new_status
+                    object.save()
+                return redirect('/')
+            else:
+                context = self.get_context_data(**kwargs)
+                context['status_form'] = status_form
+                context['pass_form'] = MyPasswordChangeForm1(user=request.user)
+                return render(self.request, self.template_name, context)
+
+
+
         # print(f"++++++++++++++ put == password_form.data = {password_form.data['new_password1']} ++++++++++++++")
         # print(f"********** put == password_form.cleaned_data = {password_form.data['status']} ****************")
         # print(f"********** put == password_form.cleaned_data.get = {password_form.cleaned_data.get('new_password1')} ****************")
@@ -439,28 +489,30 @@ class MySettingsChangeView1(LoginRequiredMixin, TemplateView):
         # status_form = MyStatusChangeForm1(user=request.user, data=request.POST or None)
         # print(f"********** put == statuss_form.cleaned_data = {status_form.data} ****************")
         # print(f"pana la validare, forma password_form.cleaned_data = {password_form.cleaned_data}")
-        if 'pass' in self.request.POST:
-            print("Schimbam parola")
-            password_form = MyPasswordChangeForm1(user=request.user, data=request.POST or None)
-            if password_form.is_valid():
-                print("forma validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-                # print(f"forma password_form.cleaned_data = {password_form.cleaned_data}")
-                self.request.user.set_password(password_form.data['new_password1'])
-                self.request.user.save()
-                update_session_auth_hash(request, password_form.user)
-                return redirect('/')
-            else:
-                print("password_form NE validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-        elif 'status' in self.request.POST:
-            print("Schimbam statutul")
-            status_form = MyStatusChangeForm1(user=request.user, data=request.POST or None)
-            if status_form.is_valid():
-                return redirect('/')
-            else:
-                print("status_form NE validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        # if 'pass' in self.request.POST:
+        #     print("Schimbam parola")
+        #     password_form = MyPasswordChangeForm1(user=request.user, data=request.POST or None)
+        #     if password_form.is_valid():
+        #         print("forma validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        #         # print(f"forma password_form.cleaned_data = {password_form.cleaned_data}")
+        #         self.request.user.set_password(password_form.data['new_password1'])
+        #         self.request.user.save()
+        #         update_session_auth_hash(request, password_form.user)
+        #         return redirect('/')
+        #     else:
+        #         print("password_form NE validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        # elif 'status' in self.request.POST:
+        #     print("Schimbam statutul")
+        #     status_form = MyStatusChangeForm1(user=request.user, data=request.POST or None)
+        #     if status_form.is_valid():
+        #         return redirect('/')
+        #     else:
+        #         print("status_form NE validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         #
         # else:
         #     print("forma NE validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+
+
 
         context = self.get_context_data()
         # context['pass_form'] = password_form
