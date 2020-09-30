@@ -321,7 +321,7 @@ class MyPasswordChangeForm1(forms.Form):
                 # self.add_error('new_password1', 'New password must be')
                 raise ValidationError("Please enter data", code='invalid')
         else:
-            raise ValidationError("Please enter data", code='invalid')
+            raise ValidationError("Please enter data1", code='invalid')
         # print(f"in clean() din forma self.user = {self.user}")
         # if self.user and not self.user.check_password(cleaned_data['old_password']):
         #     self.add_error('old_password', 'Current password is not valid')
