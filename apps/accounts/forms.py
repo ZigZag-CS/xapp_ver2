@@ -299,7 +299,7 @@ class MyPasswordChangeForm1(forms.Form):
         super().__init__(*args, **kwargs)
 
     def clean_old_password(self):
-        # print(f"In MyPasswordChangeForm1 functia clean_old_password()")
+        print(f"In MyPasswordChangeForm1 functia clean_old_password()")
         cleaned_data = super().clean()
         # print(f"In MyPasswordChangeForm1 functia clean_old_password(), cleaned_data = {cleaned_data}")
         if cleaned_data:
@@ -309,7 +309,7 @@ class MyPasswordChangeForm1(forms.Form):
         return cleaned_data
 
     def clean(self):
-        # print(f"In MyPasswordChangeForm1 functia clean()")
+        print(f"In MyPasswordChangeForm1 functia clean()")
         cleaned_data = super().clean()
         # print(f"In MyPasswordChangeForm1 functia clean(), cleaned_data = {cleaned_data}")
         if cleaned_data:
