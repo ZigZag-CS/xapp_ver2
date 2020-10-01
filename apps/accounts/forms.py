@@ -364,6 +364,7 @@ class MyStatusChangeForm1(forms.Form):
         print(f"In MyStatusChangeForm1 functia is_valid()")
         return self.is_bound and not self.errors
 
+# forme pentru solutia change pass/status - pu fiecare forma view-ul sau ****
 
 class MyPasswordChangeForm2(forms.Form):
     ''' forma de modificarea parolei utilizatorului '''
@@ -435,3 +436,4 @@ class MyStatusChangeForm2(forms.Form):
             #     self.add_error('user_status', 'need check status')
         return cleaned_data
 
+# END forme pentru solutia change pass/status - pu fiecare forma view-ul sau ****
