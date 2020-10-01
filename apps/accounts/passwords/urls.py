@@ -20,6 +20,19 @@ urlpatterns  = [
         path('password/change3/',
              user.MySettingsChangeView1.as_view(),
              name='password_change'),
+
+
+
+# test url pu forma <-> view + 1
+
+        path('password/change4/', user.MySettingsChangeView2.as_view(), name='password_change4'),
+        path('password/change4/pass', user.MyPassChangeView2.as_view(), name='forma_password_change4'),
+        path('password/change4/status', user.MyStatusChangeView2.as_view(), name='forma_status_change4'),
+
+# END test url pu forma <-> view + 1
+
+
+
 # path('password/change/done/',
 #                 auth_views.PasswordChangeDoneView.as_view(),
 #                 name='password_change_done'),

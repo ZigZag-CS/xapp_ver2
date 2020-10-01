@@ -432,32 +432,29 @@ class MySettingsChangeView1(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         print(f' ##### MySettingsChangeView1 functia POST  ======  ======')
-        context = self.get_context_data(**kwargs)
+        # context = self.get_context_data(**kwargs)
         # print(f" in POST context = {context['pass_form'].fields}")
-        if request.POST.get('pass') is not None:
-            print(f"************ pass > { request.POST.get('pass') } *********")
-            password_form = MyPasswordChangeForm1(request.POST or None, user=request.user)
-            if password_form.is_valid():
-                print("Forma pass valida")
-                messages.success(request, "Statutul parolei cu succes")
-            else:
-                print("Forma pass ne-valida")
-                messages.error(request, "Forma pass ne-valida. Schimbatul parolei fara succes.")
-                password_form = MyPasswordChangeForm1(user=request.user)
-
-        elif request.POST.get('status') is not None:
-            print(f"************ status > { request.POST.get('status') } *********")
-            status_form = MyStatusChangeForm1(request.POST or None, user=request.user)
-            if status_form.is_valid():
-                print("Forma status valida")
-                messages.success(request, "Statutul schimbat cu succes")
-            else:
-                print("Forma status ne-valida")
-                messages.error(request, "Forma status ne-valida. Schimbatul statutului fara succes.")
-                status_form = MyStatusChangeForm1(user=request.user)
-
-
-
+        # if request.POST.get('pass') is not None:
+        #     print(f"************ pass > { request.POST.get('pass') } *********")
+        #     password_form = MyPasswordChangeForm1(request.POST or None, user=request.user)
+        #     if password_form.is_valid():
+        #         print("Forma pass valida")
+        #         messages.success(request, "Statutul parolei cu succes")
+        #     else:
+        #         print("Forma pass ne-valida")
+        #         messages.error(request, "Forma pass ne-valida. Schimbatul parolei fara succes.")
+        #         password_form = MyPasswordChangeForm1(user=request.user)
+        #
+        # elif request.POST.get('status') is not None:
+        #     print(f"************ status > { request.POST.get('status') } *********")
+        #     status_form = MyStatusChangeForm1(request.POST or None, user=request.user)
+        #     if status_form.is_valid():
+        #         print("Forma status valida")
+        #         messages.success(request, "Statutul schimbat cu succes")
+        #     else:
+        #         print("Forma status ne-valida")
+        #         messages.error(request, "Forma status ne-valida. Schimbatul statutului fara succes.")
+        #         status_form = MyStatusChangeForm1(user=request.user)
 
 
         # if request.method == 'POST':
@@ -486,53 +483,51 @@ class MySettingsChangeView1(LoginRequiredMixin, TemplateView):
         # else:
         #     status_form = MyStatusChangeForm1(user=request.user)
 
-
-
-
         # print(f' ##### MySettingsChangeView1 functia POST >> context = self.get_context_data(**kwargs) => {context["pass_form"]}  ======')
         # print(f' ##### MySettingsChangeView1 functia POST >> context = self.get_context_data(**kwargs) => {context["status_form"]}  ======')
         # print(f" Metoda PUT forma password_form == {password_form}")
         # print(f" Metoda PUT forma status_form == {status_form}")
-        # if 'pass' in self.request.POST:
-        #     password_form = MyPasswordChangeForm1(request.POST or None, user=request.user)
-        #     if password_form.is_valid():
-        #         print("Schimbam parola")
-        #         self.request.user.set_password(password_form.data['new_password1'])
-        #         self.request.user.save()
-        #         update_session_auth_hash(request, password_form.user)
-        #         return redirect('/')
-        #     else:
-        #         context = self.get_context_data(**kwargs)
-        #         context['pass_form'] = password_form
-        #         # context['status_form'] = MyStatusChangeForm1(user=request.user)
-        #         return render(self.request, self.template_name, context)
-        #
-        # if 'status' in self.request.POST:
-        #     status_form = MyStatusChangeForm1(request.POST or None, user=request.user)
-        #     if status_form and status_form.is_valid():
-        #         print("Schimbam statutul")
-        #         if not request.user.is_active or not request.user.phone_active:
-        #             return redirect('/')
-        #         else:
-        #             cont = self.request.POST
-        #             try:
-        #                 new_status = cont['user_status']
-        #                 # print(f"# ======= {new_status} ========= #")
-        #             except MultiValueDictKeyError:
-        #                 new_status = request.user.user_status
-        #                 # print(f"# ======= {new_status} ========= #")
-        #             curent_user = request.user.pk
-        #             # print(f"# ===curent_user==== {curent_user} ========= #")
-        #             object = get_object_or_404(User, pk=curent_user)
-        #             # print(f"# ===object==== {object} ========= #")
-        #             object.user_status = new_status
-        #             object.save()
-        #         return redirect('/')
-        #     else:
-        #         context = self.get_context_data(**kwargs)
-        #         context['status_form'] = status_form
-        #         # context['pass_form'] = MyPasswordChangeForm1(user=request.user)
-        #         return render(self.request, self.template_name, context)
+
+        if 'pass' in self.request.POST:
+            password_form = MyPasswordChangeForm1(request.POST or None, user=request.user)
+            if password_form.is_valid():
+                print("Schimbam parola")
+                self.request.user.set_password(password_form.data['new_password1'])
+                self.request.user.save()
+                update_session_auth_hash(request, password_form.user)
+                return redirect('/')
+            else:
+                context = self.get_context_data(**kwargs)
+                context['pass_form'] = password_form
+                # context['status_form'] = MyStatusChangeForm1(user=request.user)
+                return render(self.request, self.template_name, context)
+
+        if 'status' in self.request.POST:
+            status_form = MyStatusChangeForm1(request.POST or None, user=request.user)
+            if status_form and status_form.is_valid():
+                print("Schimbam statutul")
+                if not request.user.is_active or not request.user.phone_active:
+                    return redirect('/')
+                else:
+                    cont = self.request.POST
+                    try:
+                        new_status = cont['user_status']
+                        # print(f"# ======= {new_status} ========= #")
+                    except MultiValueDictKeyError:
+                        new_status = request.user.user_status
+                        # print(f"# ======= {new_status} ========= #")
+                    curent_user = request.user.pk
+                    # print(f"# ===curent_user==== {curent_user} ========= #")
+                    object = get_object_or_404(User, pk=curent_user)
+                    # print(f"# ===object==== {object} ========= #")
+                    object.user_status = new_status
+                    object.save()
+                return redirect('/')
+            else:
+                context = self.get_context_data(**kwargs)
+                context['status_form'] = status_form
+                # context['pass_form'] = MyPasswordChangeForm1(user=request.user)
+                return render(self.request, self.template_name, context)
 
 
 
@@ -565,7 +560,6 @@ class MySettingsChangeView1(LoginRequiredMixin, TemplateView):
         #
         # else:
         #     print("forma NE validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-
 
 
         context = self.get_context_data()
@@ -615,10 +609,75 @@ class MySettingsChangeView1(LoginRequiredMixin, TemplateView):
         #         object.user_status = new_status
         #         object.save()
 
+# test alta versiune bazata pe fiecare forma cu view-ul sau *****
+
+class MySettingsChangeView2(LoginRequiredMixin, TemplateView):
+    template_name = 'accounts/registration/settings_pass_status_change1.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context.update({
+            'pass_form': MyPasswordChangeForm2(user=self.request.user),
+            'status_form': MyStatusChangeForm2(user=self.request.user)
+        })
+        print(f' MySettingsChangeView2 functia get_context_data => {context}  ======')
+        return context
+
+class MyPassChangeView2(MySettingsChangeView2):
+    template_name = 'accounts/registration/settings_pass_status_change1.html'
+
+    def get(self, *args, **kwargs):
+        return redirect(reverse("password_change4"))
+
+    def post(self, request, *args, **kwargs):
+        password_form = MyPasswordChangeForm1(request.POST or None, user=request.user)
+        if password_form.is_valid():
+            print("Forma pass valida")
+            self.request.user.set_password(password_form.data['new_password1'])
+            self.request.user.save()
+            update_session_auth_hash(request, password_form.user)
+            messages.success(request, "Statutul parolei cu succes")
+        else:
+            print("Forma pass ne-valida")
+            messages.error(request, "Forma pass ne-valida. Schimbatul parolei fara succes.")
+            password_form = MyPasswordChangeForm1(user=request.user)
+
+        context = self.get_context_data()
+        context.update({'pass_form': password_form})
+        return render(self.request, self.template_name, context)
+
+class MyStatusChangeView2(MySettingsChangeView2):
+    template_name = 'accounts/registration/settings_pass_status_change1.html'
+
+    def get(self, *args, **kwargs):
+        return redirect(reverse("password_change4"))
+
+    def post(self, request, *args, **kwargs):
+        status_form = MyStatusChangeForm1(request.POST or None, user=request.user)
+        if not request.user.is_active or not request.user.phone_active:
+            messages.error(request, "Schimbatul statutului imposibila, trebuie de cativat numarul de telefon.")
+            status_form = MyStatusChangeForm1(user=request.user)
+        else:
+            if status_form.is_valid():
+                print("Forma status valida")
+                new_status = status_form.cleaned_data['user_status']
+                print(new_status)
+                curent_user = request.user.pk
+                object = get_object_or_404(User, pk=curent_user)
+                object.user_status = new_status
+                object.save()
+                messages.success(request, "Statutul schimbat cu succes")
+            else:
+                print("Forma status ne-valida")
+                messages.error(request, "Forma status ne-valida. Schimbatul statutului fara succes.")
+                status_form = MyStatusChangeForm1(user=request.user)
+
+        context = self.get_context_data()
+        context.update({'status_form': status_form})
+        return render(self.request, self.template_name, context)
 
 
-
-
+# END test alta versiune bazata pe fiecare forma cu view-ul sau *****
 
 class MyPasswordChangeDoneView(PasswordChangeDoneView):
     template_name = 'accounts/registration/password_change_done.html'
